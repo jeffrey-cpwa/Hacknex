@@ -168,51 +168,6 @@
       </div>
     </section>
 
-    <!-- SECTION 4: PERSON ACTIVITY ANALYSIS -->
-    <section class="panel-section analysis-section">
-      <div class="panel-header">
-        <h2>4. Person Activity Analysis</h2>
-        <p class="panel-sub">Filter and inspect what each person did during a specific time range.</p>
-      </div>
-
-      <!-- Controls -->
-      <div class="timeline-controls">
-        <div class="control-group">
-          <label for="person-selector">Person:</label>
-          <select id="person-selector" class="form-select">
-            <option value="all">All Persons ▼</option>
-          </select>
-        </div>
-        <div class="control-group time-range">
-          <label>Start Time (s):</label>
-          <input type="number" id="time-start" class="form-input" min="0" step="1" value="0">
-          <label>End Time (s):</label>
-          <input type="number" id="time-end" class="form-input" min="0" step="1">
-        </div>
-      </div>
-
-      <!-- Activity Details Table (Analysis View) -->
-      <div class="timeline-table-container" style="margin-top: 1rem;">
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Timestamp</th>
-              <th>Person</th>
-              <th>Activity</th>
-              <th>Duration</th>
-              <th>Confidence</th>
-              <th>Track ID</th>
-              <th>Description</th>
-            </tr>
-          </thead>
-          <tbody id="analysis-table-body">
-            <tr>
-              <td colspan="7" class="table-empty">No events selected</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
   </div>
 
   <!-- RAW RECORD INSPECTION MODAL -->
@@ -235,6 +190,27 @@
     </div>
   </div>
 
+
+    <!-- DEBUG / VERIFICATION PANEL -->
+    <section class="panel-section debug-section" style="margin-top: 2rem;">
+      <div class="panel-header">
+        <h2>Debug / Verification Panel</h2>
+      </div>
+      <div class="debug-grid" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; background: var(--bg-card); padding: 1rem; border-radius: 8px;">
+        <div><strong>Raw events found:</strong> <span id="dbg-raw">0</span></div>
+        <div><strong>Person events:</strong> <span id="dbg-person">0</span></div>
+        <div><strong>Object events:</strong> <span id="dbg-object">0</span></div>
+        <div><strong>Valid:</strong> <span id="dbg-valid">0</span></div>
+        <div><strong>Review:</strong> <span id="dbg-review">0</span></div>
+        <div><strong>Low confidence:</strong> <span id="dbg-low">0</span></div>
+        <div><strong>Invalid:</strong> <span id="dbg-invalid">0</span></div>
+        <div><strong>Missing timestamp:</strong> <span id="dbg-missing-ts">0</span></div>
+        <div><strong>Unknown Conf:</strong> <span id="dbg-unknown-conf">0</span></div>
+        <div><strong>Duplicates:</strong> <span id="dbg-dups">0</span></div>
+      </div>
+    </section>
+  </div>
+
   <!-- EVENT DETAIL MODAL -->
   <div id="event-detail-modal" class="modal-overlay" style="display: none;">
     <div class="modal-content">
@@ -252,10 +228,31 @@
           <div><strong>End Timestamp:</strong> <span id="ed-endtimestamp"></span></div>
           <div><strong>Duration:</strong> <span id="ed-duration"></span></div>
           <div><strong>Confidence:</strong> <span id="ed-confidence"></span></div>
+          <div><strong>Status:</strong> <span id="ed-status"></span></div>
         </div>
         <div class="detail-desc">
           <strong>Description:</strong> <span id="ed-desc"></span>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RAW RECORD INSPECTION MODAL -->
+  <div id="raw-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-index">Source Record</h3>
+        <button id="modal-close" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <div><strong>Category:</strong> <span id="modal-category" class="status-badge"></span></div>
+          <div><strong>Validation Status:</strong> <span id="modal-status" class="status-badge"></span></div>
+          <div><strong>Suspicious Flag:</strong> <span id="modal-suspicious" class="status-badge"></span></div>
+          <div><strong>Notes:</strong> <span id="modal-reason"></span></div>
+        </div>
+        <div class="raw-code-label">Original Unaltered Source Record (Evidence):</div>
+        <pre><code id="modal-json-code"></code></pre>
       </div>
     </div>
   </div>
