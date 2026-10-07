@@ -20,6 +20,7 @@ export const Sidebar: React.FC = () => {
     recentInvestigations,
     activeInvestigationId,
     selectInvestigationSession,
+    startNewChat,
   } = useApp();
 
   const navItems: Array<{
@@ -27,10 +28,10 @@ export const Sidebar: React.FC = () => {
     label: string;
     icon: React.ElementType;
   }> = [
-    { id: 'upload', label: 'Upload', icon: UploadCloud },
-    { id: 'timeline', label: 'Timeline', icon: Clock },
-    { id: 'video', label: 'Footage Analysis', icon: Video },
-    { id: 'chat', label: 'New Chat', icon: MessageSquare },
+    { id: 'video', label: 'Actual Video Player', icon: Video },
+    { id: 'timeline', label: 'Timeline & Targets', icon: Clock },
+    { id: 'chat', label: 'AI Video Chat', icon: MessageSquare },
+    { id: 'upload', label: 'Upload Video', icon: UploadCloud },
   ];
 
   return (
@@ -55,7 +56,13 @@ export const Sidebar: React.FC = () => {
             return (
               <button
                 key={item.id}
-                onClick={() => setActiveTab(item.id)}
+                onClick={() => {
+                  if (item.id === 'chat' && activeTab === 'chat') {
+                    startNewChat();
+                  } else {
+                    setActiveTab(item.id);
+                  }
+                }}
                 style={{
                   ...styles.navButton,
                   ...(isActive ? styles.navButtonActive : {}),
@@ -113,9 +120,26 @@ export const Sidebar: React.FC = () => {
         </nav>
       </div>
 
-      {/* Recent Investigations List */}
+      {/* Previous Investigations (Chats from SQL Database) */}
       <div style={styles.investigationsSection}>
-        <div style={styles.sectionLabel}>RECENT INVESTIGATIONS</div>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', paddingRight: '6px' }}>
+          <div style={styles.sectionLabel}>PREVIOUS CHATS</div>
+          <button
+            onClick={() => startNewChat()}
+            style={{
+              background: 'none',
+              border: 'none',
+              color: '#F59E0B',
+              cursor: 'pointer',
+              fontSize: '11px',
+              fontWeight: 700,
+              padding: '2px 4px',
+            }}
+            title="Start New Chat Investigation"
+          >
+            + New
+          </button>
+        </div>
 
         <div style={styles.investigationsList}>
           {recentInvestigations.map((inv) => {

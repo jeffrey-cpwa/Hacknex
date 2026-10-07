@@ -142,7 +142,10 @@ export const EventRelationshipGraph: React.FC = () => {
           <div style={styles.reasoningFootnote}>
             <Sparkles size={13} color="#F59E0B" />
             <span>
-              <strong>Temporal Reasoning:</strong> Person #07 entered restricted zone 53.2s after Truck #01 docked at Bay 2, deposited Box #04, and the safety alarm tripped 1m 10s later.
+              <strong>Temporal Reasoning:</strong>{' '}
+              {relationshipNodes.length >= 2
+                ? `${relationshipNodes[0].target} ${relationshipNodes[0].title.toLowerCase()} at ${relationshipNodes[0].timestamp}, followed by ${relationshipNodes[1].target} ${relationshipNodes[1].title.toLowerCase()} at ${relationshipNodes[1].timestamp} (${relationshipNodes[0].relationToNext?.deltaFormatted || 'subsequently'}).`
+                : 'Verified chronological transitions loaded directly from SQL Database.'}
             </span>
           </div>
         </div>

@@ -141,7 +141,8 @@ export async function fetchRelationshipNodes(): Promise<TemporalRelationshipNode
 export async function sendChatMessageAPI(
   question: string,
   session?: Record<string, any>,
-  footageId?: string
+  footageId?: string,
+  sessionId?: string
 ): Promise<ChatMessage | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/chat`, {
@@ -150,7 +151,8 @@ export async function sendChatMessageAPI(
       body: JSON.stringify({
         question,
         session: session || {},
-        footage_id: footageId || 'footage-1',
+        footage_id: footageId || 'video-tracked-01',
+        session_id: sessionId || null,
       }),
     });
 
@@ -162,6 +164,52 @@ export async function sendChatMessageAPI(
     return await res.json();
   } catch (err) {
     console.error('sendChatMessageAPI error:', err);
+    return null;
+  }
+}
+
+/**
+ * Fetch previous investigations / chat sessions
+ */
+export async function fetchChatSessions(): Promise<any[] | null> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/chat/sessions`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.warn('Failed to fetch chat sessions:', err);
+    return null;
+  }
+}
+
+/**
+ * Create a new investigation chat session
+ */
+export async function createChatSession(title = 'New Investigation', videoId = 'video-tracked-01'): Promise<any | null> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/chat/sessions`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ title, video_id: videoId }),
+    });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.warn('Failed to create chat session:', err);
+    return null;
+  }
+}
+
+/**
+ * Fetch messages for a specific chat session
+ */
+export async function fetchChatMessages(sessionId: string): Promise<any | null> {
+  try {
+    const res = await fetch(`${API_BASE_URL}/chat/sessions/${encodeURIComponent(sessionId)}`);
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (err) {
+    console.warn('Failed to fetch chat session messages:', err);
     return null;
   }
 }

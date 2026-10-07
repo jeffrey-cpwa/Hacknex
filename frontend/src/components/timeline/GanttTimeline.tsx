@@ -35,15 +35,23 @@ export const GanttTimeline: React.FC = () => {
     eventId?: string;
   } | null>(null);
 
-  const timeMarkers = [
-    { label: '00:00', sec: 0 },
-    { label: '01:00', sec: 60 },
-    { label: '02:00', sec: 120 },
-    { label: '03:00', sec: 180 },
-    { label: '04:00', sec: 240 },
-    { label: '05:00', sec: 300 },
-    { label: '05:42', sec: 342 },
-  ];
+  const totalDuration = Math.max(1, activeFootage?.durationSec || 15.2);
+  const step = totalDuration > 120 ? 60 : totalDuration > 30 ? 10 : totalDuration > 15 ? 2.5 : 1;
+  const timeMarkers = React.useMemo(() => {
+    const list: Array<{ label: string; sec: number }> = [];
+    for (let s = 0; s <= totalDuration + 0.1; s += step) {
+      const cur = Math.min(s, totalDuration);
+      const mins = Math.floor(cur / 60);
+      const secs = Math.floor(cur % 60);
+      const ms = Math.floor((cur % 1) * 10);
+      const label = totalDuration < 60
+        ? `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}.${ms}`
+        : `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+      list.push({ label, sec: cur });
+      if (cur >= totalDuration) break;
+    }
+    return list;
+  }, [totalDuration, step]);
 
   const getTrackIcon = (type: string) => {
     switch (type) {

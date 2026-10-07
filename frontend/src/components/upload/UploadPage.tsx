@@ -60,14 +60,14 @@ export const UploadPage: React.FC<UploadPageProps> = ({ isEditMode, setIsEditMod
     setIsDragOver(false);
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const file = e.dataTransfer.files[0];
-      simulateFileUpload(file.name);
+      simulateFileUpload(file);
     }
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
       const file = e.target.files[0];
-      simulateFileUpload(file.name);
+      simulateFileUpload(file);
     }
   };
 

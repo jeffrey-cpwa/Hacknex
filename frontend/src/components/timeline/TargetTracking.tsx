@@ -185,19 +185,23 @@ export const TargetTracking: React.FC = () => {
           </div>
 
           {/* Dedicated Object Mode Evidence Trigger */}
-          {currentTarget.type === 'object' && (
+          {currentTarget && currentTarget.type === 'object' && (
             <div style={styles.objectEvidenceCard}>
               <div style={styles.objEvidHeader}>
                 <ShieldAlert size={15} color="#EF4444" />
                 <span style={styles.objEvidTitle}>UNATTENDED OBJECT DETECTED</span>
               </div>
               <p style={styles.objEvidDesc}>
-                Box #04 was left stationary and untouched for <strong>2m 21s</strong>, exceeding the 2-minute facility safety threshold.
+                {currentTarget.name} was detected stationary for <strong>{currentTarget.untouchedDuration || currentTarget.totalDuration || 'recorded duration'}</strong>.
               </p>
               <button
                 onClick={() => {
-                  const boxEvent = events.find((e) => e.id === 'evt-5');
-                  if (boxEvent) openEvidenceForEvent(boxEvent);
+                  const objEvent = events.find(
+                    (e) =>
+                      e.targetIds?.includes(currentTarget.id) ||
+                      e.targetNames?.includes(currentTarget.name)
+                  ) || events[0];
+                  if (objEvent) openEvidenceForEvent(objEvent);
                 }}
                 className="btn btn-danger"
                 style={{ width: '100%', padding: '7px 10px', gap: '6px' }}

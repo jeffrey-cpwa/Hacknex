@@ -153,33 +153,26 @@ def merge_duplicates(events: list[dict]) -> list[dict]:
 # MAIN CLEANER
 # -----------------------------------------------------------------------------
 
-def clean(raw_path: str, out_path: str):
-    # -- load raw --------------------------------------------------------------
-    print(f"\nLoading raw events from: {raw_path}")
-    with open(raw_path, "r", encoding="utf-8") as f:
-        raw_data = json.load(f)
-
+def clean_dict(raw_data: dict) -> dict:
+    """
+    Filter, clean, deduplicate, and normalize raw vision detection events in-memory.
+    Returns clean document according to the standardized schema.
+    """
     raw_events = raw_data.get("events", [])
-    print(f"  Raw events found: {len(raw_events)}")
 
     # -- normalise -------------------------------------------------------------
-    print("\nNormalising events...")
     normalised = []
     for re_ in raw_events:
         ev = normalise_event(re_)
         if ev:
             normalised.append(ev)
 
-    print(f"  Normalised: {len(normalised)}")
-
     # -- sort chronologically --------------------------------------------------
     normalised.sort(key=lambda e: (e["start_time"], e["person_id"]))
 
     # -- merge duplicates ------------------------------------------------------
-    print(f"\nMerging duplicates (window={MERGE_WINDOW}s)...")
     cleaned = merge_duplicates(normalised)
     cleaned.sort(key=lambda e: (e["start_time"], e["person_id"]))
-    print(f"  After merge: {len(cleaned)}")
 
     # -- assign final event IDs ------------------------------------------------
     for idx, ev in enumerate(cleaned, start=1):
@@ -247,6 +240,23 @@ def clean(raw_path: str, out_path: str):
         "events"         : ordered,
     }
 
+    return clean_doc
+
+
+def clean(raw_path: str, out_path: str):
+    # -- load raw --------------------------------------------------------------
+    print(f"\nLoading raw events from: {raw_path}")
+    with open(raw_path, "r", encoding="utf-8") as f:
+        raw_data = json.load(f)
+
+    raw_events = raw_data.get("events", [])
+    print(f"  Raw events found: {len(raw_events)}")
+
+    clean_doc = clean_dict(raw_data)
+    ordered = clean_doc["events"]
+    video_meta = clean_doc["video"]
+    summary = clean_doc["summary"]
+
     # -- validate required fields ----------------------------------------------
     print("\nValidating output...")
     required = ["event_id","person_id","person_label","action",
@@ -283,6 +293,7 @@ def clean(raw_path: str, out_path: str):
     print("=" * 50 + "\n")
 
     return clean_doc
+
 
 
 # -----------------------------------------------------------------------------

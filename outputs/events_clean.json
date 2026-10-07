@@ -1,7 +1,7 @@
 {
   "video": {
-    "video_id": "example",
-    "filename": "example.mp4",
+    "video_id": "uploaded_test",
+    "filename": "uploaded_test.mp4",
     "duration_seconds": 15.23,
     "fps": 30.0,
     "total_frames": 457

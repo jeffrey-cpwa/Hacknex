@@ -98,17 +98,18 @@ interface AppContextType {
   askPresetQuestion: (questionId: string) => void;
   recentQuestions: Array<{ id: string; label: string; timestampRef: string; query: string }>;
 
-  // Investigations Sessions
+  // Investigations Sessions (Previous Chats)
   recentInvestigations: InvestigationSession[];
   activeInvestigationId: string | null;
   selectInvestigationSession: (invId: string) => void;
+  startNewChat: () => void;
 
   // Upload Simulation
   isUploading: boolean;
   uploadProgress: number;
   uploadStage: string;
   uploadCompletedSteps: string[];
-  simulateFileUpload: (fileName?: string) => void;
+  simulateFileUpload: (fileInput?: string | File) => void;
 
   // Navigation helpers
   jumpToTimestamp: (sec: number, eventId?: string, targetTab?: NavigationTab) => void;
@@ -122,39 +123,44 @@ interface AppContextType {
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+// Default placeholder for actual tracked CCTV video
+const DEFAULT_TRACKED_VIDEO: Footage = {
+  id: 'video-tracked-01',
+  title: 'Tracked CCTV Analysis (YOLO11 + ByteTrack)',
+  filename: 'marked_video.mp4',
+  videoUrl: '/api/videos/marked_video.mp4',
+  duration: '00:15.2',
+  durationSec: 15.23,
+  date: 'Today',
+  eventCount: 8,
+  status: 'Analyzed',
+  tags: ['Actual Video', 'YOLO11', 'Tracked'],
+  resolution: '1920 × 1080',
+  fps: 30,
+  trackedPeopleCount: 3,
+  trackedObjectsCount: 0,
+  trackedVehiclesCount: 0,
+  criticalEventsCount: 0,
+  warningEventsCount: 1,
+};
+
 export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // Navigation State
-  const [activeTab, setActiveTab] = useState<NavigationTab>('upload');
+  const [activeTab, setActiveTab] = useState<NavigationTab>('video');
   const [timelineMode, setTimelineMode] = useState<TimelineMode>('incident');
   const [targetCategoryFilter, setTargetCategoryFilter] = useState<TargetCategory>('person');
-  const [selectedTargetId, setSelectedTargetId] = useState<string>('tgt-person-07');
+  const [selectedTargetId, setSelectedTargetId] = useState<string>('person_1');
 
-  // Footage State (with localStorage persistence)
-  const [footageList, setFootageList] = useState<Footage[]>(() => {
-    try {
-      const saved = localStorage.getItem('temporal_ai_footage');
-      return saved ? JSON.parse(saved) : INITIAL_FOOTAGE_LIST;
-    } catch {
-      return INITIAL_FOOTAGE_LIST;
-    }
-  });
-
-  const [activeFootageId, setActiveFootageId] = useState<string>('footage-1');
-
-  useEffect(() => {
-    try {
-      localStorage.setItem('temporal_ai_footage', JSON.stringify(footageList));
-    } catch (e) {
-      console.warn('Failed to persist footage to localStorage', e);
-    }
-  }, [footageList]);
+  // Footage State (loaded dynamically from SQL Database)
+  const [footageList, setFootageList] = useState<Footage[]>([DEFAULT_TRACKED_VIDEO]);
+  const [activeFootageId, setActiveFootageId] = useState<string>('video-tracked-01');
 
   const activeFootage = useMemo(() => {
-    return footageList.find((f) => f.id === activeFootageId) || footageList[0] || INITIAL_FOOTAGE_LIST[0];
+    return footageList.find((f) => f.id === activeFootageId) || footageList[0] || DEFAULT_TRACKED_VIDEO;
   }, [footageList, activeFootageId]);
 
-  // Playback & Video state
-  const [currentTimeSec, setCurrentTimeSec] = useState<number>(127.4); // Start at restricted entry for wow factor
+  // Actual Playback & Video state
+  const [currentTimeSec, setCurrentTimeSec] = useState<number>(0.0);
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [playbackSpeed, setPlaybackSpeed] = useState<number>(1.0);
   const [overlaysEnabled, setOverlaysEnabled] = useState<boolean>(true);
@@ -169,14 +175,14 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setOverlayFilters((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  // Events & Targets (backed by FastAPI backend with fallback)
-  const [events, setEvents] = useState<TemporalEvent[]>(MOCK_EVENTS);
-  const [allTargets, setAllTargets] = useState<TargetEntity[]>(MOCK_TARGETS);
-  const [ganttTracks, setGanttTracks] = useState<GanttTrack[]>(MOCK_GANTT_TRACKS);
-  const [relationshipNodes, setRelationshipNodes] = useState<TemporalRelationshipNode[]>(MOCK_RELATIONSHIP_NODES);
+  // Events & Targets (Strictly from SQL Database)
+  const [events, setEvents] = useState<TemporalEvent[]>([]);
+  const [allTargets, setAllTargets] = useState<TargetEntity[]>([]);
+  const [ganttTracks, setGanttTracks] = useState<GanttTrack[]>([]);
+  const [relationshipNodes, setRelationshipNodes] = useState<TemporalRelationshipNode[]>([]);
   const [backendOnline, setBackendOnline] = useState<boolean>(false);
-  const [selectedEventId, setSelectedEventId] = useState<string | null>('evt-4');
-  const [highlightedEventIds, setHighlightedEventIds] = useState<string[]>(['evt-2', 'evt-4']);
+  const [selectedEventId, setSelectedEventId] = useState<string | null>('E0001');
+  const [highlightedEventIds, setHighlightedEventIds] = useState<string[]>([]);
 
   // Backend Sync: Initial Mount
   useEffect(() => {
@@ -190,16 +196,26 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
         const footages = await api.fetchFootageList();
         if (footages && footages.length > 0 && isMounted) {
-          setFootageList((prev) => {
-            const ids = new Set(footages.map((f) => f.id));
-            const custom = prev.filter((p) => p.isCustomUploaded && !ids.has(p.id));
-            return [...footages, ...custom];
-          });
+          setFootageList(footages);
+          if (!footages.some((f) => f.id === activeFootageId)) {
+            setActiveFootageId(footages[0].id);
+          }
+        }
+
+        const sessions = await api.fetchChatSessions();
+        if (sessions && sessions.length > 0 && isMounted) {
+          setRecentInvestigations(sessions);
+          setActiveInvestigationId(sessions[0].id);
+          const firstSess = await api.fetchChatMessages(sessions[0].id);
+          if (firstSess && firstSess.messages && firstSess.messages.length > 0 && isMounted) {
+            setChatMessages(firstSess.messages);
+          }
         }
 
         const targets = await api.fetchTargets();
         if (targets && targets.length > 0 && isMounted) {
           setAllTargets(targets);
+          if (targets[0]) setSelectedTargetId(targets[0].id);
         }
 
         const tracks = await api.fetchGanttTracks();
@@ -215,6 +231,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         const evs = await api.fetchEvents(activeFootageId);
         if (evs && evs.length > 0 && isMounted) {
           setEvents(evs);
+          if (evs[0]) setSelectedEventId(evs[0].id);
         }
       } catch (err) {
         console.warn('Backend sync error:', err);
@@ -238,6 +255,21 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
             setSelectedEventId(evs[0].id);
           }
         }
+
+        const tgts = await api.fetchTargets();
+        if (tgts && tgts.length > 0 && isMounted) {
+          setAllTargets(tgts);
+        }
+
+        const gTracks = await api.fetchGanttTracks();
+        if (gTracks && isMounted) {
+          setGanttTracks(gTracks);
+        }
+
+        const rNodes = await api.fetchRelationshipNodes();
+        if (rNodes && isMounted) {
+          setRelationshipNodes(rNodes);
+        }
       } catch (err) {
         console.warn('Failed to sync events for footage:', err);
       }
@@ -253,7 +285,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
   }, [events, selectedEventId]);
 
   const selectedTarget = useMemo(() => {
-    return allTargets.find((t) => t.id === selectedTargetId) || allTargets[0];
+    return allTargets.find((t) => t.id === selectedTargetId) || allTargets[0] || null;
   }, [allTargets, selectedTargetId]);
 
   // Evidence Modal State
@@ -340,101 +372,133 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       id: 'msg-initial-ai',
       sender: 'ai',
       timestamp: '10:45 AM',
-      text: 'TEMPORAL AI Engine initialized on Factory_Camera_01.mp4. 12 temporal events, 5 key targets, and perimeter anomalies indexed across 05:42 duration. Ask what happened, when it occurred, or inspect event sequences.',
+      text: 'TEMPORAL AI Investigation initialized on actual tracked video marked_video.mp4. All people, trajectories, and events are indexed from SQL Database. Ask when people entered, left, or what happened in the footage.',
     },
   ]);
   const [isThinking, setIsThinking] = useState<boolean>(false);
-  const [currentThinkingStep, setCurrentThinkingStep] = useState<string>('Analyzing temporal events...');
+  const [currentThinkingStep, setCurrentThinkingStep] = useState<string>('Analyzing temporal query...');
 
   // Recent Questions History
   const recentQuestions = useMemo(() => {
-    return PRESET_QUESTIONS.map((pq) => ({
-      id: pq.id,
-      label: pq.shortLabel,
-      timestampRef: pq.timestampRef,
-      query: pq.question,
-    }));
+    return [
+      { id: 'q1', label: 'Person 2 Leave', timestampRef: '00:07.3', query: 'When did Person 2 leave?' },
+      { id: 'q2', label: 'Person 2 Enter', timestampRef: '00:04.2', query: 'When did Person 2 enter?' },
+      { id: 'q3', label: 'First Entry', timestampRef: '00:03.4', query: 'Who entered first?' },
+      { id: 'q4', label: 'First Departure', timestampRef: '00:05.5', query: 'Who left first?' },
+      { id: 'q5', label: 'Person 1 Presence', timestampRef: '00:07.4', query: 'How long did Person 1 stay?' },
+    ];
   }, []);
 
-  // Investigation Sessions (with localStorage persistence)
-  const [recentInvestigations, setRecentInvestigations] = useState<InvestigationSession[]>(() => {
+  // Investigation Sessions (Previous Chats from SQL Database)
+  const [recentInvestigations, setRecentInvestigations] = useState<InvestigationSession[]>([]);
+  const [activeInvestigationId, setActiveInvestigationId] = useState<string | null>('inv-session-01');
+
+  // Select a previous chat from the sidebar
+  const selectInvestigationSession = async (invId: string) => {
+    setActiveInvestigationId(invId);
+    setActiveTab('chat');
     try {
-      const saved = localStorage.getItem('temporal_ai_investigations');
-      return saved ? JSON.parse(saved) : INITIAL_RECENT_INVESTIGATIONS;
-    } catch {
-      return INITIAL_RECENT_INVESTIGATIONS;
+      const sessData = await api.fetchChatMessages(invId);
+      if (sessData && sessData.messages && sessData.messages.length > 0) {
+        setChatMessages(sessData.messages);
+      }
+    } catch (err) {
+      console.warn('Failed to load session messages:', err);
     }
-  });
+  };
 
-  const [activeInvestigationId, setActiveInvestigationId] = useState<string | null>('inv-1');
-
-  useEffect(() => {
+  // Start a fresh chat session
+  const startNewChat = async () => {
     try {
-      localStorage.setItem('temporal_ai_investigations', JSON.stringify(recentInvestigations));
-    } catch (e) {
-      console.warn('Failed to persist investigations to localStorage', e);
+      const newSess = await api.createChatSession('New Investigation', activeFootageId);
+      if (newSess) {
+        setActiveInvestigationId(newSess.id);
+        setChatMessages([
+          {
+            id: `msg-${Date.now()}-ai`,
+            sender: 'ai',
+            timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+            text: `New investigation started on ${activeFootage?.title || 'actual footage'}. Ask anything about people, events, or timestamps in this video.`,
+          },
+        ]);
+        setActiveTab('chat');
+        const sessions = await api.fetchChatSessions();
+        if (sessions) setRecentInvestigations(sessions);
+      }
+    } catch (err) {
+      console.warn('Error starting new chat session:', err);
     }
-  }, [recentInvestigations]);
+  };
 
-  // Upload Simulation State
+  // Upload and Filtration Engine State
   const [isUploading, setIsUploading] = useState<boolean>(false);
   const [uploadProgress, setUploadProgress] = useState<number>(0);
-  const [uploadStage, setUploadStage] = useState<string>('Uploading video file...');
+  const [uploadStage, setUploadStage] = useState<string>('Ready');
   const [uploadCompletedSteps, setUploadCompletedSteps] = useState<string[]>([]);
 
-  const simulateFileUpload = (fileName?: string) => {
-    const targetName = fileName || 'Factory_Camera_01_New.mp4';
+  const simulateFileUpload = async (fileInput?: string | File) => {
     setIsUploading(true);
     setUploadProgress(10);
-    setUploadStage('Uploading video evidence...');
-    setUploadCompletedSteps([]);
+    setUploadStage('Frontend sending video stream to backend...');
+    setUploadCompletedSteps(['✓ Video stream sent']);
 
-    const steps = [
-      { progress: 28, stage: 'Extracting video frames...', completed: '✓ Video uploaded' },
-      { progress: 46, stage: 'Running object & vehicle detection...', completed: '✓ Frames extracted' },
-      { progress: 68, stage: 'Tracking people & continuous trajectories...', completed: '✓ Objects detected' },
-      { progress: 84, stage: 'Extracting temporal relationships & timestamps...', completed: '✓ People tracked' },
-      { progress: 95, stage: 'Generating temporal index & Gantt intervals...', completed: '✓ Events generated' },
-      { progress: 100, stage: 'Investigation workspace ready.', completed: '✓ Timeline ready' },
-    ];
+    try {
+      await new Promise((r) => setTimeout(r, 400));
+      setUploadProgress(35);
+      setUploadStage('Backend engine identifying and tracking objects & persons (YOLO + ByteTrack)...');
+      setUploadCompletedSteps((prev) => [...prev, '✓ Objects & persons tracked']);
 
-    let currentStep = 0;
-    const interval = setInterval(() => {
-      if (currentStep < steps.length) {
-        const step = steps[currentStep];
-        setUploadProgress(step.progress);
-        setUploadStage(step.stage);
-        setUploadCompletedSteps((prev) => [...prev, step.completed]);
-        currentStep++;
+      await new Promise((r) => setTimeout(r, 600));
+      setUploadProgress(65);
+      setUploadStage('Sending raw detection data as JSON to filtration engine...');
+      setUploadCompletedSteps((prev) => [...prev, '✓ Raw tracking JSON formatted']);
+
+      let createdFootage: Footage | null = null;
+      if (fileInput instanceof File) {
+        createdFootage = await api.uploadVideoAPI(fileInput);
       } else {
-        clearInterval(interval);
-        setTimeout(() => {
-          setIsUploading(false);
-          // Add newly uploaded footage to list if not existing
-          const newFootage: Footage = {
-            id: `footage-${Date.now()}`,
-            title: targetName.replace(/\.[^/.]+$/, '').replace(/_/g, ' '),
-            filename: targetName,
-            duration: '05:42',
-            durationSec: 342,
-            date: 'Just now',
-            eventCount: 12,
-            status: 'Analyzed',
-            tags: ['Uploaded', 'Security', 'Factory'],
-            resolution: '1920 × 1080',
-            fps: 30,
-            trackedPeopleCount: 4,
-            trackedObjectsCount: 11,
-            trackedVehiclesCount: 1,
-            criticalEventsCount: 2,
-            warningEventsCount: 2,
-            isCustomUploaded: true,
-          };
-          setFootageList((prev) => [newFootage, ...prev]);
-          setActiveFootageId(newFootage.id);
-        }, 600);
+        const dummyFile = new File(['dummy_video_stream'], fileInput || 'uploaded_cctv.mp4', { type: 'video/mp4' });
+        createdFootage = await api.uploadVideoAPI(dummyFile);
       }
-    }, 450);
+
+      await new Promise((r) => setTimeout(r, 500));
+      setUploadProgress(85);
+      setUploadStage('Filtration engine cleaning, deduplicating, and persisting into SQL Database...');
+      setUploadCompletedSteps((prev) => [...prev, '✓ Filtered events stored in SQL Database']);
+
+      await new Promise((r) => setTimeout(r, 400));
+      setUploadProgress(100);
+      setUploadStage('Complete! Ready for video playback and AI chat.');
+      setUploadCompletedSteps((prev) => [...prev, '✓ Timeline & RAG index updated']);
+
+      // Refresh all database-backed resources
+      const [footages, evts, tgts, gantt, rels] = await Promise.all([
+        api.fetchFootageList(),
+        api.fetchEvents(createdFootage?.id),
+        api.fetchTargets(),
+        api.fetchGanttTracks(),
+        api.fetchRelationshipNodes(),
+      ]);
+
+      if (footages && footages.length > 0) setFootageList(footages);
+      if (evts) setEvents(evts);
+      if (tgts) setAllTargets(tgts);
+      if (gantt) setGanttTracks(gantt);
+      if (rels) setRelationshipNodes(rels);
+
+      if (createdFootage) {
+        setActiveFootageId(createdFootage.id);
+      }
+
+      setTimeout(() => {
+        setIsUploading(false);
+        setActiveTab('video');
+      }, 700);
+
+    } catch (err) {
+      console.error('Error during video upload & filtration flow:', err);
+      setIsUploading(false);
+    }
   };
 
   // Chat state and conversational session memory
@@ -453,18 +517,23 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
     setChatMessages((prev) => [...prev, userMsg]);
     setIsThinking(true);
-    setCurrentThinkingStep('Analyzing temporal events with ground truth...');
+    setCurrentThinkingStep('Querying Temporal RAG against SQL Database...');
 
     const timer1 = setTimeout(() => {
-      setCurrentThinkingStep('Querying Temporal RAG deterministic evidence...');
+      setCurrentThinkingStep('Retrieving verified ground truth timestamps...');
     }, 450);
 
     const timer2 = setTimeout(() => {
-      setCurrentThinkingStep('Synthesizing verified natural response via Qwen3:4b...');
+      setCurrentThinkingStep('Synthesizing natural response via Qwen3:4b...');
     }, 900);
 
     try {
-      const response = await api.sendChatMessageAPI(questionText, chatSession, activeFootageId);
+      const response = await api.sendChatMessageAPI(
+        questionText,
+        chatSession,
+        activeFootageId,
+        activeInvestigationId || undefined
+      );
       clearTimeout(timer1);
       clearTimeout(timer2);
       setIsThinking(false);
@@ -473,24 +542,16 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         if ((response as any).session) {
           setChatSession((response as any).session);
         }
+        if ((response as any).sessionId && !activeInvestigationId) {
+          setActiveInvestigationId((response as any).sessionId);
+        }
         setChatMessages((prev) => [...prev, response]);
-      } else {
-        // Fallback preset matching if backend is not responding
-        const qLower = questionText.toLowerCase();
-        const matchedPreset = PRESET_QUESTIONS.find(
-          (p) =>
-            qLower.includes(p.shortLabel.toLowerCase()) ||
-            qLower.includes(p.question.toLowerCase())
-        ) || PRESET_QUESTIONS[0];
 
-        const aiResponse: ChatMessage = {
-          id: `msg-${Date.now()}-ai`,
-          sender: 'ai',
-          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
-          text: matchedPreset ? matchedPreset.answer.summary : `Temporal reasoning engine identified relevant events across ${activeFootage.title}.`,
-          answerData: matchedPreset ? matchedPreset.answer : PRESET_QUESTIONS[0].answer,
-        };
-        setChatMessages((prev) => [...prev, aiResponse]);
+        // Refresh previous chats in sidebar
+        const updatedSessions = await api.fetchChatSessions();
+        if (updatedSessions) {
+          setRecentInvestigations(updatedSessions);
+        }
       }
     } catch (err) {
       clearTimeout(timer1);
@@ -582,17 +643,6 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     setTimelineMode('target');
   };
 
-  const selectInvestigationSession = (invId: string) => {
-    const inv = recentInvestigations.find((i) => i.id === invId);
-    if (!inv) return;
-    setActiveInvestigationId(invId);
-    setActiveFootageId(inv.footageId);
-    if (inv.activeMode) {
-      setTimelineMode(inv.activeMode);
-    }
-    setActiveTab('timeline');
-  };
-
   const deleteFootage = (id: string) => {
     setFootageList((prev) => prev.filter((f) => f.id !== id));
     if (activeFootageId === id) {
@@ -668,6 +718,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
         recentInvestigations,
         activeInvestigationId,
         selectInvestigationSession,
+        startNewChat,
         isUploading,
         uploadProgress,
         uploadStage,

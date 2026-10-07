@@ -1,21 +1,18 @@
 {
-  "video": "example.mp4",
+  "video": "uploaded_test.mp4",
+  "duration_seconds": 15.23,
   "fps": 30.0,
   "frame_count": 457,
-  "duration_seconds": 15.23,
-  "people_discovered": 3,
-  "people": [
-    { "person": "Person 1", "automatic_identity": true },
-    { "person": "Person 2", "automatic_identity": true },
-    { "person": "Person 3", "automatic_identity": true }
-  ],
   "events": [
     {
       "event_id": "E0001",
       "track_id": 1,
       "person": "Person 1",
       "event": "ENTER",
-      "timestamp": { "seconds": 3.42, "formatted": "00:03.42" },
+      "timestamp": {
+        "seconds": 3.42,
+        "formatted": "00:03.42"
+      },
       "confidence": 0.94,
       "description": "Person 1 entered the video scene."
     },
@@ -24,7 +21,10 @@
       "track_id": 1,
       "person": "Person 1",
       "event": "ENTER",
-      "timestamp": { "seconds": 3.55, "formatted": "00:03.55" },
+      "timestamp": {
+        "seconds": 3.55,
+        "formatted": "00:03.55"
+      },
       "confidence": 0.88,
       "description": "Person 1 entered the video scene (duplicate)."
     },
@@ -33,7 +33,10 @@
       "track_id": 2,
       "person": "Person 2",
       "event": "ENTER",
-      "timestamp": { "seconds": 4.17, "formatted": "00:04.17" },
+      "timestamp": {
+        "seconds": 4.17,
+        "formatted": "00:04.17"
+      },
       "confidence": 0.91,
       "description": "Person 2 entered the video scene."
     },
@@ -42,7 +45,10 @@
       "track_id": 3,
       "person": "Person 3",
       "event": "ENTER",
-      "timestamp": { "seconds": 5.00, "formatted": "00:05.00" },
+      "timestamp": {
+        "seconds": 5.0,
+        "formatted": "00:05.00"
+      },
       "confidence": 0.0,
       "description": "Unknown person entered."
     },
@@ -51,8 +57,14 @@
       "track_id": 3,
       "person": "Person 3",
       "event": "SHORT_STAY",
-      "timestamp": { "seconds": 5.00, "formatted": "00:05.00" },
-      "end_timestamp": { "seconds": 5.50, "formatted": "00:05.50" },
+      "timestamp": {
+        "seconds": 5.0,
+        "formatted": "00:05.00"
+      },
+      "end_timestamp": {
+        "seconds": 5.5,
+        "formatted": "00:05.50"
+      },
       "duration_seconds": 0.5,
       "confidence": 0.72,
       "description": "Person 3 appeared briefly."
@@ -62,7 +74,10 @@
       "track_id": 3,
       "person": "Person 3",
       "event": "LEAVE",
-      "timestamp": { "seconds": 5.50, "formatted": "00:05.50" },
+      "timestamp": {
+        "seconds": 5.5,
+        "formatted": "00:05.50"
+      },
       "confidence": 0.68,
       "description": "Person 3 left the scene."
     },
@@ -71,8 +86,14 @@
       "track_id": 1,
       "person": "Person 1",
       "event": "STAY",
-      "timestamp": { "seconds": 3.42, "formatted": "00:03.42" },
-      "end_timestamp": { "seconds": 10.80, "formatted": "00:10.80" },
+      "timestamp": {
+        "seconds": 3.42,
+        "formatted": "00:03.42"
+      },
+      "end_timestamp": {
+        "seconds": 10.8,
+        "formatted": "00:10.80"
+      },
       "duration_seconds": 7.38,
       "confidence": 0.96,
       "description": "Person 1 stayed in scene."
@@ -82,7 +103,10 @@
       "track_id": 2,
       "person": "Person 2",
       "event": "LEAVE",
-      "timestamp": { "seconds": 7.31, "formatted": "00:07.31" },
+      "timestamp": {
+        "seconds": 7.31,
+        "formatted": "00:07.31"
+      },
       "confidence": 0.89,
       "description": "Person 2 left the scene."
     },
@@ -91,7 +115,10 @@
       "track_id": 1,
       "person": "Person 1",
       "event": "LEAVE",
-      "timestamp": { "seconds": 10.80, "formatted": "00:10.80" },
+      "timestamp": {
+        "seconds": 10.8,
+        "formatted": "00:10.80"
+      },
       "confidence": 0.93,
       "description": "Person 1 left the scene."
     }
