@@ -13,6 +13,11 @@ import {
   FolderOpen,
   Filter,
   Search,
+  Eye,
+  Clock,
+  MessageSquare,
+  ArrowRight,
+  Video,
 } from 'lucide-react';
 import { Footage } from '../../types';
 
@@ -25,6 +30,7 @@ export const UploadPage: React.FC<UploadPageProps> = ({ isEditMode, setIsEditMod
   const {
     footageList,
     activeFootageId,
+    activeFootage,
     setActiveFootageId,
     setActiveTab,
     isUploading,
@@ -79,6 +85,10 @@ export const UploadPage: React.FC<UploadPageProps> = ({ isEditMode, setIsEditMod
   const handleOpenFootage = (ftg: Footage) => {
     setActiveFootageId(ftg.id);
     setActiveTab('video');
+  };
+
+  const handlePreviewRawFootage = (ftg: Footage) => {
+    setActiveFootageId(ftg.id);
   };
 
   const handleTimelineFootage = (ftg: Footage) => {
@@ -253,6 +263,75 @@ export const UploadPage: React.FC<UploadPageProps> = ({ isEditMode, setIsEditMod
         </div>
       )}
 
+      {/* Uploaded Video Preview: Raw Footage Viewer */}
+      {activeFootage && (
+        <div style={styles.rawPreviewContainer}>
+          <div style={styles.previewHeader}>
+            <div style={styles.previewHeaderLeft}>
+              <div style={styles.rawFeedBadge}>
+                <span style={styles.redDot} />
+                <span>RAW CAMERA STREAM · SOURCE VIDEO</span>
+              </div>
+              <div style={styles.previewTitle}>{activeFootage.title}</div>
+            </div>
+            <div style={styles.previewHeaderRight}>
+              <span style={styles.rawFilePill}>
+                Raw File: {activeFootage.rawFilename || activeFootage.filename}
+              </span>
+              <button
+                onClick={() => {
+                  setActiveTab('video');
+                }}
+                style={styles.goToAnalysisBtn}
+                title="Switch to Video Analysis to see mapped objects & bounding boxes"
+              >
+                <Film size={14} />
+                <span>Analyze in Video Analysis (Mapped View) →</span>
+              </button>
+            </div>
+          </div>
+
+          <div style={styles.videoPlayerWrapper}>
+            <video
+              key={activeFootage.id + (activeFootage.rawVideoUrl || activeFootage.videoUrl)}
+              src={`http://localhost:8000${activeFootage.rawVideoUrl || activeFootage.videoUrl || ('/api/videos/raw/' + (activeFootage.rawFilename || activeFootage.filename))}`}
+              controls
+              style={styles.rawVideoElement}
+              playsInline
+            />
+          </div>
+
+          <div style={styles.previewFooterBar}>
+            <div style={styles.previewMetaGroup}>
+              <span style={styles.metaBadge}>Duration: {activeFootage.duration}</span>
+              <span style={styles.metaBadge}>FPS: {activeFootage.fps || 30}</span>
+              <span style={styles.metaBadge}>Resolution: {activeFootage.resolution || '1920 × 1080'}</span>
+              <span style={styles.metaBadgeEvents}>{activeFootage.eventCount} Filtered Events in SQL DB</span>
+            </div>
+            <div style={styles.previewActionsGroup}>
+              <button
+                onClick={() => {
+                  setActiveTab('timeline');
+                }}
+                style={styles.previewActionBtn}
+              >
+                <Clock size={13} />
+                <span>View Timeline</span>
+              </button>
+              <button
+                onClick={() => {
+                  setActiveTab('chat');
+                }}
+                style={styles.previewActionBtn}
+              >
+                <MessageSquare size={13} />
+                <span>Ask AI</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* RECENT FOOTAGE Section */}
       <div style={styles.footageSection}>
         <div style={styles.sectionHeader}>
@@ -311,6 +390,7 @@ export const UploadPage: React.FC<UploadPageProps> = ({ isEditMode, setIsEditMod
               isChecked={selectedFootageIds.includes(footage.id)}
               onToggleCheck={() => handleToggleCheck(footage.id)}
               onOpen={() => handleOpenFootage(footage)}
+              onPreviewRaw={() => handlePreviewRawFootage(footage)}
               onTimeline={() => handleTimelineFootage(footage)}
               onAskAI={() => handleAskAIFootage(footage)}
               onDelete={() => deleteFootage(footage.id)}
@@ -532,5 +612,151 @@ const styles: Record<string, React.CSSProperties> = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
     gap: '16px',
+  },
+  rawPreviewContainer: {
+    backgroundColor: '#0A0D12',
+    border: '1px solid rgba(245, 158, 11, 0.25)',
+    borderRadius: 'var(--radius-lg)',
+    padding: '16px 20px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '12px',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.5)',
+  },
+  previewHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '12px',
+    paddingBottom: '10px',
+    borderBottom: '1px solid #1E232B',
+  },
+  previewHeaderLeft: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4px',
+  },
+  rawFeedBadge: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.06em',
+    color: '#EF4444',
+  },
+  redDot: {
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    backgroundColor: '#EF4444',
+    boxShadow: '0 0 8px rgba(239, 68, 68, 0.8)',
+    display: 'inline-block',
+  },
+  previewTitle: {
+    fontSize: '16px',
+    fontWeight: 700,
+    color: '#F5F7FA',
+  },
+  previewHeaderRight: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '12px',
+    flexWrap: 'wrap',
+  },
+  rawFilePill: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11.5px',
+    color: '#38BDF8',
+    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    border: '1px solid rgba(56, 189, 248, 0.25)',
+    padding: '4px 10px',
+    borderRadius: '4px',
+  },
+  goToAnalysisBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    backgroundColor: '#F59E0B',
+    color: '#08090B',
+    fontWeight: 700,
+    fontSize: '12px',
+    padding: '8px 14px',
+    borderRadius: '6px',
+    border: 'none',
+    cursor: 'pointer',
+    transition: 'all 0.2s ease',
+    boxShadow: '0 0 16px rgba(245, 158, 11, 0.35)',
+  },
+  videoPlayerWrapper: {
+    position: 'relative',
+    borderRadius: '8px',
+    overflow: 'hidden',
+    backgroundColor: '#000000',
+    border: '1px solid #202631',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    maxHeight: '440px',
+  },
+  rawVideoElement: {
+    width: '100%',
+    maxHeight: '440px',
+    objectFit: 'contain',
+    display: 'block',
+    backgroundColor: '#000000',
+  },
+  previewFooterBar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '12px',
+    paddingTop: '8px',
+  },
+  previewMetaGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    flexWrap: 'wrap',
+  },
+  metaBadge: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    color: '#9299A4',
+    backgroundColor: 'rgba(255, 255, 255, 0.04)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    padding: '3px 8px',
+    borderRadius: '4px',
+  },
+  metaBadgeEvents: {
+    fontFamily: 'var(--font-mono)',
+    fontSize: '11px',
+    color: '#F59E0B',
+    backgroundColor: 'rgba(245, 158, 11, 0.1)',
+    border: '1px solid rgba(245, 158, 11, 0.25)',
+    padding: '3px 8px',
+    borderRadius: '4px',
+    fontWeight: 600,
+  },
+  previewActionsGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  previewActionBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '5px',
+    fontSize: '11.5px',
+    fontWeight: 600,
+    color: '#D1D5DB',
+    backgroundColor: 'rgba(255, 255, 255, 0.05)',
+    border: '1px solid rgba(255, 255, 255, 0.12)',
+    padding: '5px 10px',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
   },
 };

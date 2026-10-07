@@ -125,16 +125,19 @@ const AppContext = createContext<AppContextType | undefined>(undefined);
 
 // Default placeholder for actual tracked CCTV video
 const DEFAULT_TRACKED_VIDEO: Footage = {
-  id: 'video-tracked-01',
-  title: 'Tracked CCTV Analysis (YOLO11 + ByteTrack)',
+  id: 'video-cctv-01',
+  title: 'Main Entrance Surveillance (Camera 01)',
   filename: 'marked_video.mp4',
   videoUrl: '/api/videos/marked_video.mp4',
+  rawFilename: 'test.mp4',
+  rawVideoUrl: '/api/videos/raw/test.mp4',
+  mappedFilename: 'marked_video.mp4',
   duration: '00:15.2',
   durationSec: 15.23,
   date: 'Today',
   eventCount: 8,
   status: 'Analyzed',
-  tags: ['Actual Video', 'YOLO11', 'Tracked'],
+  tags: ['Surveillance', 'Camera 01', 'Object Tracked'],
   resolution: '1920 × 1080',
   fps: 30,
   trackedPeopleCount: 3,
@@ -153,7 +156,7 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
 
   // Footage State (loaded dynamically from SQL Database)
   const [footageList, setFootageList] = useState<Footage[]>([DEFAULT_TRACKED_VIDEO]);
-  const [activeFootageId, setActiveFootageId] = useState<string>('video-tracked-01');
+  const [activeFootageId, setActiveFootageId] = useState<string>('video-cctv-01');
 
   const activeFootage = useMemo(() => {
     return footageList.find((f) => f.id === activeFootageId) || footageList[0] || DEFAULT_TRACKED_VIDEO;
@@ -248,27 +251,32 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
     let isMounted = true;
     async function syncEvents() {
       try {
-        const evs = await api.fetchEvents(activeFootageId);
-        if (evs && evs.length > 0 && isMounted) {
-          setEvents(evs);
-          if (evs[0]) {
-            setSelectedEventId(evs[0].id);
+        const [evs, tgts, gTracks, rNodes] = await Promise.all([
+          api.fetchEvents(activeFootageId),
+          api.fetchTargets(activeFootageId),
+          api.fetchGanttTracks(activeFootageId),
+          api.fetchRelationshipNodes(activeFootageId),
+        ]);
+
+        if (isMounted) {
+          if (evs) {
+            setEvents(evs);
+            if (evs[0]) {
+              setSelectedEventId(evs[0].id);
+            }
           }
-        }
-
-        const tgts = await api.fetchTargets();
-        if (tgts && tgts.length > 0 && isMounted) {
-          setAllTargets(tgts);
-        }
-
-        const gTracks = await api.fetchGanttTracks();
-        if (gTracks && isMounted) {
-          setGanttTracks(gTracks);
-        }
-
-        const rNodes = await api.fetchRelationshipNodes();
-        if (rNodes && isMounted) {
-          setRelationshipNodes(rNodes);
+          if (tgts) {
+            setAllTargets(tgts);
+            if (tgts[0]) {
+              setSelectedTargetId(tgts[0].id);
+            }
+          }
+          if (gTracks) {
+            setGanttTracks(gTracks);
+          }
+          if (rNodes) {
+            setRelationshipNodes(rNodes);
+          }
         }
       } catch (err) {
         console.warn('Failed to sync events for footage:', err);
@@ -475,9 +483,9 @@ export const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => 
       const [footages, evts, tgts, gantt, rels] = await Promise.all([
         api.fetchFootageList(),
         api.fetchEvents(createdFootage?.id),
-        api.fetchTargets(),
-        api.fetchGanttTracks(),
-        api.fetchRelationshipNodes(),
+        api.fetchTargets(createdFootage?.id),
+        api.fetchGanttTracks(createdFootage?.id),
+        api.fetchRelationshipNodes(createdFootage?.id),
       ]);
 
       if (footages && footages.length > 0) setFootageList(footages);

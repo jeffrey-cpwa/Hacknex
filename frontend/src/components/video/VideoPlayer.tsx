@@ -127,7 +127,7 @@ export const VideoPlayer: React.FC = () => {
           <div style={styles.hudTopLeft}>
             <span style={styles.recDot} />
             <span style={styles.hudFilename}>
-              {activeFootage?.filename || 'marked_video.mp4'} (ACTUAL TRACKED STREAM)
+              VIDEO ANALYSIS · {activeFootage?.title || 'Camera'} (MAPPED OBJECT TRACKED STREAM)
             </span>
           </div>
           <div style={styles.hudTopRight}>

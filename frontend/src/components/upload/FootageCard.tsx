@@ -21,6 +21,7 @@ interface FootageCardProps {
   isChecked?: boolean;
   onToggleCheck?: () => void;
   onOpen: () => void;
+  onPreviewRaw?: () => void;
   onTimeline: () => void;
   onAskAI: () => void;
   onDelete?: () => void;
@@ -33,6 +34,7 @@ export const FootageCard: React.FC<FootageCardProps> = ({
   isChecked,
   onToggleCheck,
   onOpen,
+  onPreviewRaw,
   onTimeline,
   onAskAI,
 }) => {
@@ -46,12 +48,12 @@ export const FootageCard: React.FC<FootageCardProps> = ({
       className="footage-card"
     >
       {/* Thumbnail Area */}
-      <div style={styles.thumbnailContainer} onClick={isEditMode ? onToggleCheck : onOpen}>
+      <div style={styles.thumbnailContainer} onClick={isEditMode ? onToggleCheck : (onPreviewRaw || onOpen)}>
         {/* Mock Forensic Video Frame Canvas */}
         <div style={styles.thumbnailBg}>
           <div style={styles.gridOverlay} />
           <div style={styles.hudHeader}>
-            <span style={styles.hudBadge}>CAM_REC</span>
+            <span style={styles.hudBadge}>CCTV FEED</span>
           </div>
           <div style={styles.centerIcon}>
             <Play size={22} color="#F59E0B" fill="rgba(245, 158, 11, 0.4)" />
@@ -97,7 +99,19 @@ export const FootageCard: React.FC<FootageCardProps> = ({
           <div style={styles.title} title={footage.title}>
             {footage.title}
           </div>
-          <span style={styles.filename}>{footage.filename}</span>
+          <span style={styles.filename} title={`Raw: ${footage.rawFilename || footage.filename} | Mapped: ${footage.mappedFilename || footage.filename}`}>
+            {footage.rawFilename || footage.filename}
+          </span>
+        </div>
+
+        {/* Stream Type Tags */}
+        <div style={{ display: 'flex', gap: '6px', fontSize: '10px', marginTop: '2px', flexWrap: 'wrap' }}>
+          <span style={{ padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(56, 189, 248, 0.1)', color: '#38BDF8', border: '1px solid rgba(56, 189, 248, 0.25)', fontFamily: 'var(--font-mono)' }}>
+            Raw: {footage.rawFilename || footage.filename}
+          </span>
+          <span style={{ padding: '1px 6px', borderRadius: '4px', backgroundColor: 'rgba(16, 185, 129, 0.1)', color: '#10B981', border: '1px solid rgba(16, 185, 129, 0.25)', fontFamily: 'var(--font-mono)' }}>
+            Mapped: {footage.mappedFilename || footage.filename}
+          </span>
         </div>
 
         {/* Meta stats */}
@@ -129,10 +143,18 @@ export const FootageCard: React.FC<FootageCardProps> = ({
           <button
             onClick={onOpen}
             style={{ ...styles.actionBtn, ...styles.actionBtnPrimary }}
-            title="Open Footage Player"
+            title="Open in Video Analysis (Mapped View)"
+          >
+            <Film size={12} />
+            <span>Video Analysis</span>
+          </button>
+          <button
+            onClick={onPreviewRaw}
+            style={styles.actionBtn}
+            title="View Raw Uploaded Video"
           >
             <Eye size={12} />
-            <span>Open</span>
+            <span>Raw Preview</span>
           </button>
           <button
             onClick={onTimeline}

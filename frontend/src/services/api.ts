@@ -94,11 +94,12 @@ export async function fetchEvents(footageId?: string): Promise<TemporalEvent[] |
 }
 
 /**
- * Fetch Targets
+ * Fetch Targets for footage
  */
-export async function fetchTargets(): Promise<TargetEntity[] | null> {
+export async function fetchTargets(footageId?: string): Promise<TargetEntity[] | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/targets`);
+    const url = footageId ? `${API_BASE_URL}/targets?footage_id=${encodeURIComponent(footageId)}` : `${API_BASE_URL}/targets`;
+    const res = await fetch(url);
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -108,11 +109,12 @@ export async function fetchTargets(): Promise<TargetEntity[] | null> {
 }
 
 /**
- * Fetch Gantt Tracks
+ * Fetch Gantt Tracks for footage
  */
-export async function fetchGanttTracks(): Promise<GanttTrack[] | null> {
+export async function fetchGanttTracks(footageId?: string): Promise<GanttTrack[] | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/gantt`);
+    const url = footageId ? `${API_BASE_URL}/gantt?footage_id=${encodeURIComponent(footageId)}` : `${API_BASE_URL}/gantt`;
+    const res = await fetch(url);
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -122,11 +124,12 @@ export async function fetchGanttTracks(): Promise<GanttTrack[] | null> {
 }
 
 /**
- * Fetch Relationship Nodes
+ * Fetch Relationship Nodes for footage
  */
-export async function fetchRelationshipNodes(): Promise<TemporalRelationshipNode[] | null> {
+export async function fetchRelationshipNodes(footageId?: string): Promise<TemporalRelationshipNode[] | null> {
   try {
-    const res = await fetch(`${API_BASE_URL}/timeline/relationships`);
+    const url = footageId ? `${API_BASE_URL}/timeline/relationships?footage_id=${encodeURIComponent(footageId)}` : `${API_BASE_URL}/timeline/relationships`;
+    const res = await fetch(url);
     if (!res.ok) return null;
     return await res.json();
   } catch (err) {
@@ -151,7 +154,7 @@ export async function sendChatMessageAPI(
       body: JSON.stringify({
         question,
         session: session || {},
-        footage_id: footageId || 'video-tracked-01',
+        footage_id: footageId || 'video-cctv-01',
         session_id: sessionId || null,
       }),
     });
@@ -185,7 +188,7 @@ export async function fetchChatSessions(): Promise<any[] | null> {
 /**
  * Create a new investigation chat session
  */
-export async function createChatSession(title = 'New Investigation', videoId = 'video-tracked-01'): Promise<any | null> {
+export async function createChatSession(title = 'New Investigation', videoId = 'video-cctv-01'): Promise<any | null> {
   try {
     const res = await fetch(`${API_BASE_URL}/chat/sessions`, {
       method: 'POST',

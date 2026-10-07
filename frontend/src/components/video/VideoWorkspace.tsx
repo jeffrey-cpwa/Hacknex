@@ -12,10 +12,42 @@ export const VideoWorkspace: React.FC = () => {
     <div style={styles.container}>
       {/* Page Header */}
       <div style={styles.header}>
-        <h1 style={styles.title}>FOOTAGE ANALYSIS</h1>
-        <p style={styles.subtitle}>
-          Select uploaded footage to inspect detected events.
-        </p>
+        <div style={styles.headerRow}>
+          <div>
+            <h1 style={styles.title}>VIDEO ANALYSIS</h1>
+            <p style={styles.subtitle}>
+              Neural object tracking & trajectory-mapped CCTV streams from SQL Database.
+            </p>
+          </div>
+          <div style={styles.mappedModeBadge}>
+            <span style={styles.livePulseDot} />
+            <span>MAPPED STREAM · OBJECT TRACKED</span>
+          </div>
+        </div>
+
+        {/* Camera / Video Switcher Bar */}
+        <div style={styles.cameraSwitcherBar}>
+          <span style={styles.switcherLabel}>SELECT CAMERA:</span>
+          <div style={styles.switcherList}>
+            {footageList.map((f) => {
+              const isActive = f.id === activeFootageId;
+              return (
+                <button
+                  key={f.id}
+                  onClick={() => setActiveFootageId(f.id)}
+                  style={{
+                    ...styles.cameraBtn,
+                    ...(isActive ? styles.cameraBtnActive : {}),
+                  }}
+                >
+                  <span style={{ ...styles.cameraDot, backgroundColor: isActive ? '#F59E0B' : '#5B6270' }} />
+                  <span style={styles.cameraName}>{f.title}</span>
+                  <span style={styles.cameraEventsBadge}>{f.eventCount} events</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </div>
 
       {/* Main Analysis Area: Video + Events */}
@@ -104,6 +136,14 @@ const styles: Record<string, React.CSSProperties> = {
   header: {
     display: 'flex',
     flexDirection: 'column',
+    gap: '14px',
+  },
+  headerRow: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    flexWrap: 'wrap',
+    gap: '12px',
   },
   title: {
     fontSize: '20px',
@@ -115,6 +155,89 @@ const styles: Record<string, React.CSSProperties> = {
     fontSize: '13px',
     color: 'var(--text-secondary)',
     marginTop: '3px',
+  },
+  mappedModeBadge: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.06em',
+    color: '#10B981',
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+    border: '1px solid rgba(16, 185, 129, 0.25)',
+    padding: '4px 10px',
+    borderRadius: '16px',
+  },
+  livePulseDot: {
+    width: '7px',
+    height: '7px',
+    borderRadius: '50%',
+    backgroundColor: '#10B981',
+    boxShadow: '0 0 8px rgba(16, 185, 129, 0.8)',
+    display: 'inline-block',
+  },
+  cameraSwitcherBar: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+    flexWrap: 'wrap',
+    padding: '8px 12px',
+    backgroundColor: '#0A0C0F',
+    border: '1px solid var(--border-default)',
+    borderRadius: 'var(--radius-md)',
+  },
+  switcherLabel: {
+    fontSize: '11px',
+    fontWeight: 700,
+    letterSpacing: '0.06em',
+    color: 'var(--text-muted)',
+    fontFamily: 'var(--font-mono)',
+  },
+  switcherList: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+    flexWrap: 'wrap',
+  },
+  cameraBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    padding: '5px 10px',
+    borderRadius: '6px',
+    backgroundColor: 'rgba(255, 255, 255, 0.03)',
+    border: '1px solid rgba(255, 255, 255, 0.08)',
+    color: 'var(--text-secondary)',
+    fontSize: '12px',
+    cursor: 'pointer',
+    transition: 'all 0.15s ease',
+  },
+  cameraBtnActive: {
+    backgroundColor: 'rgba(245, 158, 11, 0.12)',
+    borderColor: 'rgba(245, 158, 11, 0.4)',
+    color: '#F59E0B',
+    fontWeight: 600,
+    boxShadow: '0 0 12px rgba(245, 158, 11, 0.15)',
+  },
+  cameraDot: {
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+  },
+  cameraName: {
+    maxWidth: '180px',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+  },
+  cameraEventsBadge: {
+    fontSize: '10px',
+    fontFamily: 'var(--font-mono)',
+    backgroundColor: 'rgba(0, 0, 0, 0.4)',
+    padding: '1px 5px',
+    borderRadius: '3px',
+    color: '#9299A4',
   },
   topGrid: {
     display: 'grid',

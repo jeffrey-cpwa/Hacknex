@@ -13,6 +13,7 @@ __pycache__/
 *.pt
 outputs/*.mp4
 outputs/*.pkl
+outputs/*.db
 videos/*.mp4
 
 # Frontend

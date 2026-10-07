@@ -34,15 +34,15 @@ export const TopHeader: React.FC<TopHeaderProps> = ({
   const getPageTitle = () => {
     switch (activeTab) {
       case 'upload':
-        return 'FOOTAGE';
+        return 'UPLOAD FOOTAGE';
       case 'timeline':
         return 'TIMELINE';
       case 'video':
-        return 'FOOTAGE ANALYSIS';
+        return 'VIDEO ANALYSIS';
       case 'chat':
-        return 'NEW CHAT';
+        return 'INVESTIGATION CHAT';
       default:
-        return 'CCTV ANALYSIS';
+        return 'VIDEO ANALYSIS';
     }
   };
 

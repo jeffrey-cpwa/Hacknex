@@ -28,7 +28,7 @@ export const Sidebar: React.FC = () => {
     label: string;
     icon: React.ElementType;
   }> = [
-    { id: 'video', label: 'Actual Video Player', icon: Video },
+    { id: 'video', label: 'Video Analysis', icon: Video },
     { id: 'timeline', label: 'Timeline & Targets', icon: Clock },
     { id: 'chat', label: 'AI Video Chat', icon: MessageSquare },
     { id: 'upload', label: 'Upload Video', icon: UploadCloud },

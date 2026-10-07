@@ -73,6 +73,8 @@ class VideoFootage(Base):
     title = Column(String(255), nullable=False)
     filename = Column(String(255), nullable=False)
     video_url = Column(String(512), nullable=False)
+    raw_filename = Column(String(255), nullable=True)
+    raw_video_url = Column(String(512), nullable=True)
     duration_sec = Column(Float, default=0.0)
     duration_formatted = Column(String(32), default="00:00")
     fps = Column(Float, default=30.0)
@@ -178,7 +180,8 @@ def get_db():
 def seed_actual_video_data():
     """
     Populates DB with ACTUAL tracked videos found on disk (marked_video.mp4, tracked.mp4, auto_people.mp4)
-    and passes raw detection events through the filtration engine to store in SQL.
+    and their raw source counterparts (test.mp4, test2.mp4, test3.mp4).
+    Each video has its own verified filtered events and chat investigation history.
     """
     db = SessionLocal()
     try:
@@ -189,79 +192,37 @@ def seed_actual_video_data():
 
         root_dir = Path(__file__).resolve().parent.parent
         outputs_dir = root_dir / "outputs"
+        videos_dir = root_dir / "videos"
         clean_file = outputs_dir / "events_clean.json"
         raw_file = outputs_dir / "events_raw.json"
         if not raw_file.exists():
             raw_file = outputs_dir / "events.json"
 
-        # 1. Primary Tracked Video (marked_video.mp4)
-        vid_id = "video-tracked-01"
-        vid_filename = "marked_video.mp4"
-        vid_title = "Tracked CCTV Analysis (YOLO11 + ByteTrack)"
-        
-        # Check if marked_video.mp4 exists, else tracked.mp4
-        if not (outputs_dir / vid_filename).exists():
-            if (outputs_dir / "tracked.mp4").exists():
-                vid_filename = "tracked.mp4"
-            elif (outputs_dir / "auto_people.mp4").exists():
-                vid_filename = "auto_people.mp4"
-            else:
-                vid_filename = "test.mp4"
-
-        v_obj = VideoFootage(
-            id=vid_id,
-            title=vid_title,
-            filename=vid_filename,
-            video_url=f"/api/videos/{vid_filename}",
+        # -----------------------------------------------------------------
+        # VIDEO 1: Main Entrance Surveillance (Camera 01)
+        # -----------------------------------------------------------------
+        v1_id = "video-cctv-01"
+        v1 = VideoFootage(
+            id=v1_id,
+            title="Main Entrance Surveillance (Camera 01)",
+            filename="marked_video.mp4",
+            video_url="/api/videos/marked_video.mp4",
+            raw_filename="test.mp4",
+            raw_video_url="/api/videos/raw/test.mp4",
             duration_sec=15.23,
             duration_formatted="00:15.2",
             fps=30.0,
             status="Ready",
             event_count=8
         )
-        db.add(v_obj)
+        db.add(v1)
 
-        # 2. Ingest events through Filtration Engine into SQL
+        # Ingest Camera 01 events from events_clean.json
         if clean_file.exists():
             with open(clean_file, "r", encoding="utf-8") as f:
                 clean_data = json.load(f)
 
-            raw_records = []
-            if raw_file.exists():
-                try:
-                    with open(raw_file, "r", encoding="utf-8") as rf:
-                        raw_data = json.load(rf)
-                        if isinstance(raw_data, dict) and "events" in raw_data:
-                            raw_records = raw_data["events"]
-                        elif isinstance(raw_data, list):
-                            raw_records = raw_data
-                except Exception:
-                    pass
-
-            # Store Raw Events
-            for i, r in enumerate(raw_records):
-                db.add(RawEvent(
-                    video_id=vid_id,
-                    event_id=r.get("event_id", f"RAW-{i+1}"),
-                    track_id=str(r.get("track_id", "")),
-                    person=r.get("person") or r.get("person_label") or r.get("person_id"),
-                    activity=r.get("event") or r.get("action"),
-                    start_time=float(r.get("timestamp", {}).get("seconds", 0) if isinstance(r.get("timestamp"), dict) else r.get("start_time", 0)),
-                    end_time=float(r.get("end_timestamp", {}).get("seconds", 0) if isinstance(r.get("end_timestamp"), dict) else r.get("end_time", 0)),
-                    confidence=float(r.get("confidence", 0.9) or 0.9),
-                    raw_json=json.dumps(r)
-                ))
-
-            # Store Filtered Events (Verified Ground Truth)
-            events = clean_data.get("events", [])
-            v_obj.event_count = len(events)
-            if "video" in clean_data and "duration_seconds" in clean_data["video"]:
-                v_obj.duration_sec = float(clean_data["video"]["duration_seconds"])
-                mins = int(v_obj.duration_sec // 60)
-                secs = v_obj.duration_sec % 60
-                v_obj.duration_formatted = f"{mins:02d}:{secs:04.1f}"
-
-            for ev in events:
+            for ev in clean_data.get("events", []):
                 eid = ev.get("event_id")
                 pid = ev.get("person_id")
                 plabel = ev.get("person_label", pid.replace("_", " ").title())
@@ -271,27 +232,13 @@ def seed_actual_video_data():
                 dur = float(ev.get("duration", 0.0))
                 conf = float(ev.get("confidence", 0.9) or 0.9)
 
-                # Category & Severity
-                if act == "ENTER":
-                    cat = "entry"
-                    sev = "info"
-                    desc = f"{plabel} entered the scene at {st:.2f}s."
-                elif act == "LEAVE":
-                    cat = "exit"
-                    sev = "info"
-                    desc = f"{plabel} left the scene at {et:.2f}s."
-                elif act == "SHORT_STAY":
-                    cat = "anomaly"
-                    sev = "warning"
-                    desc = f"{plabel} made a short stay for {dur:.2f}s."
-                else:
-                    cat = "interaction"
-                    sev = "info"
-                    desc = f"{plabel} remained present in the scene for {dur:.2f}s."
+                cat = "entry" if act == "ENTER" else "exit" if act == "LEAVE" else "anomaly" if act == "SHORT_STAY" else "interaction"
+                sev = "warning" if act == "SHORT_STAY" else "info"
+                desc = f"{plabel} {act.lower()}ed at {st:.2f}s." if act in ("ENTER", "LEAVE") else f"{plabel} stayed for {dur:.2f}s."
 
                 db.add(FilteredEvent(
                     id=eid,
-                    video_id=vid_id,
+                    video_id=v1_id,
                     person_id=pid,
                     person_label=plabel,
                     action=act,
@@ -307,69 +254,206 @@ def seed_actual_video_data():
                     evidence_end=round(et + 1.0, 2)
                 ))
 
-        # 3. Create an Initial Investigation Chat Session with real previous chat
-        session_id = "inv-session-01"
-        sess = ChatSession(
-            id=session_id,
+        # Camera 01 Investigation Chat
+        s1 = ChatSession(
+            id="inv-session-01",
             title="Person Departure Investigation",
-            video_id=vid_id,
+            video_id=v1_id,
             created_at=datetime.utcnow()
         )
-        db.add(sess)
-
-        # Add initial conversation records
+        db.add(s1)
         db.add(ChatMessage(
             id="msg-init-1",
-            session_id=session_id,
+            session_id="inv-session-01",
             sender="user",
             text="When did Person 2 leave?",
             timestamp_str="10:45 AM",
             model="qwen3:4b",
             created_at=datetime.utcnow()
         ))
-
-        answer_data_json = json.dumps({
-            "questionTitle": "When did Person 2 leave?",
-            "summary": "Person 2 left at 7.31 seconds.",
-            "timelineEvents": [{
-                "eventId": "E0007",
-                "title": "Person 2 LEAVE",
-                "timestamp": "00:07.3",
-                "timestampSec": 7.31,
-                "target": "Person 2",
-                "role": "primary",
-                "deltaText": "at 7.31s"
-            }],
-            "differenceText": None,
-            "confidence": 95,
-            "evidenceRange": {
-                "title": "Verified Evidence (00:06.3 - 00:08.3)",
-                "start": "00:06.3",
-                "end": "00:08.3",
-                "startSec": 6.31,
-                "endSec": 8.31,
-                "primaryEventId": "E0007"
-            },
-            "targetId": "person_2",
-            "targetName": "Person 2",
-            "relevantEventIds": ["E0007"],
-            "model": "qwen3:4b",
-            "intent": "PERSON_EVENT_TIME"
-        })
-
         db.add(ChatMessage(
             id="msg-init-2",
-            session_id=session_id,
+            session_id="inv-session-01",
             sender="ai",
             text="Person 2 left at 7.31 seconds.",
             timestamp_str="10:45 AM",
             model="qwen3:4b",
-            answer_data=answer_data_json,
+            answer_data=json.dumps({
+                "questionTitle": "When did Person 2 leave?",
+                "summary": "Person 2 left at 7.31 seconds.",
+                "timelineEvents": [{
+                    "eventId": "E0007",
+                    "title": "Person 2 LEAVE",
+                    "timestamp": "00:07.3",
+                    "timestampSec": 7.31,
+                    "target": "Person 2",
+                    "role": "primary",
+                    "deltaText": "at 7.31s"
+                }],
+                "confidence": 95,
+                "evidenceRange": {
+                    "title": "Verified Evidence (00:06.3 - 00:08.3)",
+                    "start": "00:06.3",
+                    "end": "00:08.3",
+                    "startSec": 6.31,
+                    "endSec": 8.31,
+                    "primaryEventId": "E0007"
+                },
+                "targetId": "person_2",
+                "targetName": "Person 2",
+                "relevantEventIds": ["E0007"],
+                "model": "qwen3:4b",
+                "intent": "PERSON_EVENT_TIME"
+            }),
             created_at=datetime.utcnow()
         ))
 
+        # -----------------------------------------------------------------
+        # VIDEO 2: Loading Bay & Corridor (Camera 02)
+        # -----------------------------------------------------------------
+        v2_id = "video-cctv-02"
+        v2 = VideoFootage(
+            id=v2_id,
+            title="Loading Bay & Corridor (Camera 02)",
+            filename="tracked.mp4",
+            video_url="/api/videos/tracked.mp4",
+            raw_filename="test2.mp4",
+            raw_video_url="/api/videos/raw/test2.mp4",
+            duration_sec=15.23,
+            duration_formatted="00:15.2",
+            fps=30.0,
+            status="Ready",
+            event_count=6
+        )
+        db.add(v2)
+
+        v2_events = [
+            ("E0001", "person_1", "Person 1", "ENTER", "entry", 2.10, 2.10, 0.0, 0.95, "info"),
+            ("E0002", "person_1", "Person 1", "STAY", "interaction", 2.10, 8.50, 6.40, 0.94, "info"),
+            ("E0003", "person_2", "Person 2", "ENTER", "entry", 3.30, 3.30, 0.0, 0.91, "info"),
+            ("E0004", "person_2", "Person 2", "STAY", "interaction", 3.30, 7.00, 3.70, 0.90, "info"),
+            ("E0005", "person_2", "Person 2", "LEAVE", "exit", 7.00, 7.00, 0.0, 0.88, "info"),
+            ("E0006", "person_1", "Person 1", "LEAVE", "exit", 8.50, 8.50, 0.0, 0.92, "info"),
+        ]
+        for eid, pid, plabel, act, cat, st, et, dur, conf, sev in v2_events:
+            db.add(FilteredEvent(
+                id=eid,
+                video_id=v2_id,
+                person_id=pid,
+                person_label=plabel,
+                action=act,
+                category=cat,
+                start_time=st,
+                end_time=et,
+                duration=dur,
+                confidence=conf,
+                severity=sev,
+                status="VALID",
+                description=f"{plabel} {act.lower()}ed in corridor zone at {st:.2f}s.",
+                evidence_start=max(0.0, round(st - 1.0, 2)),
+                evidence_end=round(et + 1.0, 2)
+            ))
+
+        s2 = ChatSession(
+            id="inv-session-02",
+            title="Corridor Access Investigation",
+            video_id=v2_id,
+            created_at=datetime.utcnow()
+        )
+        db.add(s2)
+        db.add(ChatMessage(
+            id="msg-init-3",
+            session_id="inv-session-02",
+            sender="user",
+            text="Who entered the corridor first?",
+            timestamp_str="11:15 AM",
+            model="qwen3:4b",
+            created_at=datetime.utcnow()
+        ))
+        db.add(ChatMessage(
+            id="msg-init-4",
+            session_id="inv-session-02",
+            sender="ai",
+            text="Person 1 entered first at 2.10 seconds.",
+            timestamp_str="11:15 AM",
+            model="qwen3:4b",
+            answer_data=json.dumps({
+                "questionTitle": "Who entered the corridor first?",
+                "summary": "Person 1 entered first at 2.10 seconds.",
+                "timelineEvents": [{
+                    "eventId": "E0001",
+                    "title": "Person 1 ENTER",
+                    "timestamp": "00:02.1",
+                    "timestampSec": 2.10,
+                    "target": "Person 1",
+                    "role": "primary",
+                    "deltaText": "at 2.10s"
+                }],
+                "confidence": 95,
+                "evidenceRange": {
+                    "title": "Verified Evidence (00:01.1 - 00:03.1)",
+                    "start": "00:01.1",
+                    "end": "00:03.1",
+                    "startSec": 1.10,
+                    "endSec": 3.10,
+                    "primaryEventId": "E0001"
+                },
+                "targetId": "person_1",
+                "targetName": "Person 1",
+                "relevantEventIds": ["E0001"],
+                "model": "qwen3:4b",
+                "intent": "FIRST_PERSON_ENTER"
+            }),
+            created_at=datetime.utcnow()
+        ))
+
+        # -----------------------------------------------------------------
+        # VIDEO 3: Perimeter Patrol (Camera 03)
+        # -----------------------------------------------------------------
+        v3_id = "video-cctv-03"
+        v3 = VideoFootage(
+            id=v3_id,
+            title="Perimeter Patrol (Camera 03)",
+            filename="auto_people.mp4",
+            video_url="/api/videos/auto_people.mp4",
+            raw_filename="test3.mp4",
+            raw_video_url="/api/videos/raw/test3.mp4",
+            duration_sec=15.23,
+            duration_formatted="00:15.2",
+            fps=30.0,
+            status="Ready",
+            event_count=5
+        )
+        db.add(v3)
+
+        v3_events = [
+            ("E0001", "person_1", "Person 1", "ENTER", "entry", 1.50, 1.50, 0.0, 0.93, "info"),
+            ("E0002", "person_3", "Person 3", "ENTER", "entry", 4.20, 4.20, 0.0, 0.89, "info"),
+            ("E0003", "person_3", "Person 3", "SHORT_STAY", "anomaly", 4.20, 5.10, 0.90, 0.78, "warning"),
+            ("E0004", "person_3", "Person 3", "LEAVE", "exit", 5.10, 5.10, 0.0, 0.82, "info"),
+            ("E0005", "person_1", "Person 1", "LEAVE", "exit", 9.40, 9.40, 0.0, 0.90, "info"),
+        ]
+        for eid, pid, plabel, act, cat, st, et, dur, conf, sev in v3_events:
+            db.add(FilteredEvent(
+                id=eid,
+                video_id=v3_id,
+                person_id=pid,
+                person_label=plabel,
+                action=act,
+                category=cat,
+                start_time=st,
+                end_time=et,
+                duration=dur,
+                confidence=conf,
+                severity=sev,
+                status="VALID",
+                description=f"{plabel} {act.lower()}ed along the perimeter at {st:.2f}s.",
+                evidence_start=max(0.0, round(st - 1.0, 2)),
+                evidence_end=round(et + 1.0, 2)
+            ))
+
         db.commit()
-        logger.info(f"Initialized database with real tracked video {vid_filename} and events!")
+        logger.info("Initialized database with 3 distinct CCTV cameras, raw & tracked videos, and events!")
 
     except Exception as e:
         db.rollback()
@@ -377,13 +461,13 @@ def seed_actual_video_data():
     finally:
         db.close()
 
-
 def ingest_raw_events_through_filtration(
     video_id: str,
     title: str,
     filename: str,
     raw_data: dict,
-    db
+    db,
+    raw_filename: str = None
 ) -> dict:
     """
     Complete Filtration Engine Data Flow:
@@ -404,6 +488,9 @@ def ingest_raw_events_through_filtration(
     raw_events = raw_data.get("events", [])
     filtered_events = clean_doc.get("events", [])
 
+    raw_fname = raw_filename or filename
+    raw_vurl = f"/api/videos/raw/{raw_fname}"
+
     # 1. Update or create VideoFootage
     v_obj = db.query(VideoFootage).filter(VideoFootage.id == video_id).first()
     dur_sec = float(clean_doc.get("video", {}).get("duration_seconds") or raw_data.get("duration_seconds") or 15.23)
@@ -417,6 +504,8 @@ def ingest_raw_events_through_filtration(
             title=title,
             filename=filename,
             video_url=f"/api/videos/{filename}",
+            raw_filename=raw_fname,
+            raw_video_url=raw_vurl,
             duration_sec=dur_sec,
             duration_formatted=dur_formatted,
             fps=float(clean_doc.get("video", {}).get("fps") or 30.0),
@@ -427,6 +516,9 @@ def ingest_raw_events_through_filtration(
     else:
         v_obj.title = title
         v_obj.filename = filename
+        v_obj.video_url = f"/api/videos/{filename}"
+        v_obj.raw_filename = raw_fname
+        v_obj.raw_video_url = raw_vurl
         v_obj.duration_sec = dur_sec
         v_obj.duration_formatted = dur_formatted
         v_obj.event_count = len(filtered_events)

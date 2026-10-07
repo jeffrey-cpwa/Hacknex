@@ -143,28 +143,7 @@ def get_health(db: Session = Depends(get_db)):
 @app.get("/api/footage")
 def list_footage(db: Session = Depends(get_db)):
     """List actual tracked video footage items from SQL Database."""
-    # Check for any new video files on disk and register them
-    for vid_file in list(OUTPUTS_DIR.glob("*.mp4")) + list(VIDEOS_DIR.glob("*.mp4")):
-        v_id = f"vid-{vid_file.stem}"
-        existing = db.query(VideoFootage).filter(
-            (VideoFootage.id == v_id) | (VideoFootage.filename == vid_file.name)
-        ).first()
-        if not existing:
-            new_v = VideoFootage(
-                id=v_id,
-                title=vid_file.stem.replace("_", " ").title(),
-                filename=vid_file.name,
-                video_url=f"/api/videos/{vid_file.name}",
-                duration_sec=15.23,
-                duration_formatted="00:15.2",
-                fps=30.0,
-                status="Ready",
-                event_count=0
-            )
-            db.add(new_v)
-            db.commit()
-
-    videos = db.query(VideoFootage).all()
+    videos = db.query(VideoFootage).order_by(VideoFootage.id.asc()).all()
     result = []
     for v in videos:
         # Count distinct people tracked in this video
@@ -187,6 +166,9 @@ def list_footage(db: Session = Depends(get_db)):
             "title": v.title,
             "filename": v.filename,
             "videoUrl": v.video_url,
+            "rawFilename": v.raw_filename or v.filename,
+            "rawVideoUrl": v.raw_video_url or f"/api/videos/raw/{v.raw_filename or v.filename}",
+            "mappedFilename": v.filename,
             "duration": v.duration_formatted,
             "durationSec": v.duration_sec,
             "fps": v.fps,
@@ -216,6 +198,9 @@ def get_footage_by_id(footage_id: str, db: Session = Depends(get_db)):
         "title": v.title,
         "filename": v.filename,
         "videoUrl": v.video_url,
+        "rawFilename": v.raw_filename or v.filename,
+        "rawVideoUrl": v.raw_video_url or f"/api/videos/raw/{v.raw_filename or v.filename}",
+        "mappedFilename": v.filename,
         "duration": v.duration_formatted,
         "durationSec": v.duration_sec,
         "fps": v.fps,
@@ -224,15 +209,28 @@ def get_footage_by_id(footage_id: str, db: Session = Depends(get_db)):
     }
 
 
+@app.get("/api/videos/raw/{video_filename}")
+def stream_raw_video(video_filename: str):
+    """Serve raw uploaded video files directly for upload page preview."""
+    cand1 = VIDEOS_DIR / video_filename
+    cand2 = OUTPUTS_DIR / video_filename
+    target = cand1 if cand1.exists() else cand2 if cand2.exists() else None
+
+    if not target or not target.exists():
+        raise HTTPException(status_code=404, detail=f"Raw video file '{video_filename}' not found")
+
+    return FileResponse(path=str(target), media_type="video/mp4", filename=video_filename)
+
+
 @app.get("/api/videos/{video_filename}")
 def stream_video(video_filename: str):
-    """Serve actual video files directly with support for HTML5 video playback."""
+    """Serve mapped (object tracked) video files directly."""
     cand1 = OUTPUTS_DIR / video_filename
     cand2 = VIDEOS_DIR / video_filename
     target = cand1 if cand1.exists() else cand2 if cand2.exists() else None
 
     if not target or not target.exists():
-        raise HTTPException(status_code=404, detail=f"Video file '{video_filename}' not found")
+        raise HTTPException(status_code=404, detail=f"Tracked video file '{video_filename}' not found")
 
     return FileResponse(path=str(target), media_type="video/mp4", filename=video_filename)
 
@@ -249,10 +247,6 @@ def get_events(footage_id: Optional[str] = None, db: Session = Depends(get_db)):
         query = query.filter(FilteredEvent.video_id == footage_id)
 
     db_events = query.order_by(FilteredEvent.start_time).all()
-    
-    # If specific footage had no events yet, fallback to all filtered events
-    if not db_events and footage_id:
-        db_events = db.query(FilteredEvent).order_by(FilteredEvent.start_time).all()
 
     result = []
     for i, ev in enumerate(db_events):
@@ -321,8 +315,6 @@ def get_targets(footage_id: Optional[str] = None, db: Session = Depends(get_db))
         query = query.filter(FilteredEvent.video_id == footage_id)
 
     db_events = query.order_by(FilteredEvent.start_time).all()
-    if not db_events:
-        db_events = db.query(FilteredEvent).order_by(FilteredEvent.start_time).all()
 
     # Group by person_id
     targets_map = {}
@@ -419,8 +411,6 @@ def get_relationships(footage_id: Optional[str] = None, db: Session = Depends(ge
         query = query.filter(FilteredEvent.video_id == footage_id)
 
     db_events = query.order_by(FilteredEvent.start_time).all()
-    if not db_events:
-        db_events = db.query(FilteredEvent).order_by(FilteredEvent.start_time).all()
 
     nodes = []
     for i, ev in enumerate(db_events):
@@ -470,7 +460,7 @@ def list_chat_sessions(db: Session = Depends(get_db)):
             "title": s.title,
             "date": s.updated_at.strftime("%b %d · %I:%M %p"),
             "eventCount": msg_count,
-            "footageId": s.video_id or "video-tracked-01",
+            "footageId": s.video_id or "video-cctv-01",
             "footageTitle": s.video.title if s.video else "Tracked CCTV Video",
             "lastQuery": last_text,
             "activeMode": "incident"
@@ -483,7 +473,7 @@ def create_chat_session(payload: Dict[str, Any], db: Session = Depends(get_db)):
     """Create a new investigation chat session."""
     session_id = f"inv-{int(time.time()*1000)}"
     title = payload.get("title", "New Investigation")
-    vid_id = payload.get("video_id", "video-tracked-01")
+    vid_id = payload.get("video_id", "video-cctv-01")
 
     new_sess = ChatSession(
         id=session_id,
@@ -543,7 +533,7 @@ class ChatRequest(BaseModel):
     question: str
     session_id: Optional[str] = None
     session: Optional[Dict[str, Any]] = None
-    footage_id: Optional[str] = "video-tracked-01"
+    footage_id: Optional[str] = "video-cctv-01"
 
 
 @app.post("/api/chat")
@@ -587,8 +577,32 @@ def handle_chat(req: ChatRequest, db: Session = Depends(get_db)):
     )
     db.add(db_user_msg)
 
-    # 3. Execute Temporal RAG and Qwen3:4b
+    # 3. Execute Temporal RAG and Qwen3:4b for this specific footage
     try:
+        target_fid = req.footage_id or (sess.video_id if sess else None) or "video-cctv-01"
+        evts = db.query(FilteredEvent).filter(FilteredEvent.video_id == target_fid).order_by(FilteredEvent.start_time).all()
+        if evts:
+            video_rec = db.query(VideoFootage).filter(VideoFootage.id == target_fid).first()
+            clean_doc = {
+                "video": {
+                    "filename": video_rec.filename if video_rec else target_fid,
+                    "duration_seconds": video_rec.duration_sec if video_rec else 15.23,
+                    "fps": video_rec.fps if video_rec else 30.0
+                },
+                "people": [{"person_id": p, "label": p.replace("_", " ").title()} for p in sorted(list(set(e.person_id for e in evts)))],
+                "events": [{
+                    "event_id": e.id,
+                    "person_id": e.person_id,
+                    "person_label": e.person_label,
+                    "action": e.action,
+                    "start_time": e.start_time,
+                    "end_time": e.end_time,
+                    "duration": e.duration,
+                    "confidence": e.confidence
+                } for e in evts]
+            }
+            temporal_engine.reload_events(clean_doc)
+
         session_state = req.session or {}
         res = chatbot_backend.answer_question(question, session_state)
 
@@ -735,7 +749,7 @@ async def process_filter_data(request: Request, db: Session = Depends(get_db)):
     """
     payload = await request.json()
     raw_data = payload.get("data")
-    video_id = payload.get("video_id", "video-tracked-01")
+    video_id = payload.get("video_id", "video-cctv-01")
     filter_person = payload.get("person", "all")
     filter_start = parse_val(payload.get("start", 0)) or 0
     filter_end = parse_val(payload.get("end", None))
@@ -948,13 +962,19 @@ async def upload_and_process_video(file: UploadFile = File(...), db: Session = D
         except Exception as ex:
             print(f"Warning reading raw events: {ex}")
 
+    # Mapped video file (object-tracked stream)
+    mapped_filename = "marked_video.mp4"
+    if not (OUTPUTS_DIR / mapped_filename).exists():
+        mapped_filename = "tracked.mp4" if (OUTPUTS_DIR / "tracked.mp4").exists() else file.filename
+
     # Pass raw JSON through the Filtration Engine into SQL Database
     res = db_module.ingest_raw_events_through_filtration(
         video_id=video_id,
         title=title,
-        filename=file.filename,
+        filename=mapped_filename,
         raw_data=raw_data,
-        db=db
+        db=db,
+        raw_filename=file.filename
     )
 
     new_v = db.query(VideoFootage).filter(VideoFootage.id == video_id).first()
@@ -964,12 +984,15 @@ async def upload_and_process_video(file: UploadFile = File(...), db: Session = D
         "title": new_v.title,
         "filename": new_v.filename,
         "videoUrl": new_v.video_url,
+        "rawFilename": new_v.raw_filename or file.filename,
+        "rawVideoUrl": new_v.raw_video_url or f"/api/videos/raw/{file.filename}",
+        "mappedFilename": mapped_filename,
         "duration": new_v.duration_formatted,
         "durationSec": new_v.duration_sec,
         "fps": new_v.fps,
         "status": new_v.status,
         "eventCount": new_v.event_count,
-        "tags": ["Actual Video", "YOLO Tracked"],
+        "tags": ["Uploaded Video", "Object Tracked"],
         "trackedPeopleCount": res.get("summary", {}).get("total_people", 3),
         "trackedObjectsCount": 0,
         "trackedVehiclesCount": 0,

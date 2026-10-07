@@ -131,6 +131,9 @@ export interface Footage {
   trackedVehiclesCount: number;
   thumbnailUrl?: string;
   videoUrl?: string;
+  rawFilename?: string;
+  rawVideoUrl?: string;
+  mappedFilename?: string;
   criticalEventsCount: number;
   warningEventsCount: number;
   isCustomUploaded?: boolean;

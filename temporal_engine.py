@@ -33,13 +33,28 @@ def _load(path: str = CLEAN_FILE) -> dict:
         return json.load(f)
 
 
-_DATA   = _load()
-_EVENTS = _DATA["events"]          # already chronologically sorted
-_PEOPLE = _DATA["people"]
-_VIDEO  = _DATA["video"]
+_DATA: dict = {}
+_EVENTS: list = []
+_PEOPLE: list = []
+_VIDEO: dict = {}
+_BY_ID: dict = {}
 
-# O(1) lookup by event_id
-_BY_ID: dict = {e["event_id"]: e for e in _EVENTS}
+def reload_events(data_or_path=None):
+    """Reload temporal engine dataset in-memory or from file path."""
+    global _DATA, _EVENTS, _PEOPLE, _VIDEO, _BY_ID
+    if isinstance(data_or_path, dict):
+        _DATA = data_or_path
+    elif isinstance(data_or_path, str):
+        _DATA = _load(data_or_path)
+    else:
+        _DATA = _load(CLEAN_FILE)
+    _EVENTS = _DATA.get("events", [])
+    _PEOPLE = _DATA.get("people", [])
+    _VIDEO = _DATA.get("video", {})
+    _BY_ID = {e["event_id"]: e for e in _EVENTS}
+
+# Initialize with default clean file
+reload_events()
 
 
 # =============================================================================
