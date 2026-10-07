@@ -1,0 +1,3871 @@
+{
+  "video": "test.mp4",
+  "fps": 60.008,
+  "frame_count": 1567,
+  "duration_seconds": 26.113,
+  "people_discovered": 16,
+  "people": [
+    {
+      "person": "Person 1",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 2",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 3",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 4",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 5",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 6",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 7",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 8",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 9",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 10",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 11",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 12",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 13",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 14",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 15",
+      "automatic_identity": true
+    },
+    {
+      "person": "Person 16",
+      "automatic_identity": true
+    }
+  ],
+  "events": [
+    {
+      "event_id": "E0001",
+      "track_id": 1,
+      "person": "Person 2",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.957,
+      "description": "Person 2 entered the video scene."
+    },
+    {
+      "event_id": "E0002",
+      "track_id": 2,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.947,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0003",
+      "track_id": 3,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.556,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0004",
+      "track_id": 4,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.446,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0005",
+      "track_id": 5,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.258,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0006",
+      "track_id": 5,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "end_timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0007",
+      "track_id": 5,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0008",
+      "track_id": 4,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "end_timestamp": {
+        "seconds": 0.133,
+        "formatted": "00:00.13"
+      },
+      "duration_seconds": 0.133,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0009",
+      "track_id": 4,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 0.133,
+        "formatted": "00:00.13"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0010",
+      "track_id": 9,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 0.467,
+        "formatted": "00:00.47"
+      },
+      "confidence": 0.5,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0011",
+      "track_id": 3,
+      "person": "Person 3",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "end_timestamp": {
+        "seconds": 0.417,
+        "formatted": "00:00.42"
+      },
+      "duration_seconds": 0.417,
+      "confidence": 0.773,
+      "description": "Person 3 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0012",
+      "track_id": 3,
+      "person": "Person 3",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 0.417,
+        "formatted": "00:00.42"
+      },
+      "confidence": 0.773,
+      "description": "Person 3 left the scene."
+    },
+    {
+      "event_id": "E0013",
+      "track_id": 9,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 0.467,
+        "formatted": "00:00.47"
+      },
+      "end_timestamp": {
+        "seconds": 0.683,
+        "formatted": "00:00.68"
+      },
+      "duration_seconds": 0.217,
+      "confidence": 0.505,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0014",
+      "track_id": 9,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 0.683,
+        "formatted": "00:00.68"
+      },
+      "confidence": 0.505,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0015",
+      "track_id": 20,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 2.633,
+        "formatted": "00:02.63"
+      },
+      "confidence": 0.429,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0016",
+      "track_id": 20,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 2.633,
+        "formatted": "00:02.63"
+      },
+      "end_timestamp": {
+        "seconds": 2.8,
+        "formatted": "00:02.80"
+      },
+      "duration_seconds": 0.167,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0017",
+      "track_id": 20,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 2.8,
+        "formatted": "00:02.80"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0018",
+      "track_id": 25,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 3.466,
+        "formatted": "00:03.47"
+      },
+      "confidence": 0.578,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0019",
+      "track_id": 1,
+      "person": "Person 2",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "end_timestamp": {
+        "seconds": 3.466,
+        "formatted": "00:03.47"
+      },
+      "duration_seconds": 3.466,
+      "confidence": 0.456,
+      "description": "Person 2 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0020",
+      "track_id": 1,
+      "person": "Person 2",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 3.466,
+        "formatted": "00:03.47"
+      },
+      "confidence": 0.456,
+      "description": "Person 2 left the scene."
+    },
+    {
+      "event_id": "E0021",
+      "track_id": 33,
+      "person": "Person 3",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 3.749,
+        "formatted": "00:03.75"
+      },
+      "confidence": 0.729,
+      "description": "Person 3 entered the video scene."
+    },
+    {
+      "event_id": "E0022",
+      "track_id": 34,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 3.833,
+        "formatted": "00:03.83"
+      },
+      "confidence": 0.547,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0023",
+      "track_id": 37,
+      "person": "Person 3",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 4.216,
+        "formatted": "00:04.22"
+      },
+      "confidence": 0.474,
+      "description": "Person 3 entered the video scene."
+    },
+    {
+      "event_id": "E0024",
+      "track_id": 37,
+      "person": "Person 3",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 4.216,
+        "formatted": "00:04.22"
+      },
+      "end_timestamp": {
+        "seconds": 4.466,
+        "formatted": "00:04.47"
+      },
+      "duration_seconds": 0.25,
+      "confidence": 0.444,
+      "description": "Person 3 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0025",
+      "track_id": 37,
+      "person": "Person 3",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 4.466,
+        "formatted": "00:04.47"
+      },
+      "confidence": 0.444,
+      "description": "Person 3 left the scene."
+    },
+    {
+      "event_id": "E0026",
+      "track_id": 33,
+      "person": "Person 3",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 3.749,
+        "formatted": "00:03.75"
+      },
+      "end_timestamp": {
+        "seconds": 4.949,
+        "formatted": "00:04.95"
+      },
+      "duration_seconds": 1.2,
+      "confidence": 0.444,
+      "description": "Person 3 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0027",
+      "track_id": 33,
+      "person": "Person 3",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 4.949,
+        "formatted": "00:04.95"
+      },
+      "confidence": 0.444,
+      "description": "Person 3 left the scene."
+    },
+    {
+      "event_id": "E0028",
+      "track_id": 54,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 5.549,
+        "formatted": "00:05.55"
+      },
+      "confidence": 0.337,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0029",
+      "track_id": 56,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 5.649,
+        "formatted": "00:05.65"
+      },
+      "confidence": 0.399,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0030",
+      "track_id": 34,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 3.833,
+        "formatted": "00:03.83"
+      },
+      "end_timestamp": {
+        "seconds": 5.466,
+        "formatted": "00:05.47"
+      },
+      "duration_seconds": 1.633,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0031",
+      "track_id": 34,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 5.466,
+        "formatted": "00:05.47"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0032",
+      "track_id": 57,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 5.733,
+        "formatted": "00:05.73"
+      },
+      "confidence": 0.668,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0033",
+      "track_id": 54,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 5.549,
+        "formatted": "00:05.55"
+      },
+      "end_timestamp": {
+        "seconds": 5.766,
+        "formatted": "00:05.77"
+      },
+      "duration_seconds": 0.217,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0034",
+      "track_id": 54,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 5.766,
+        "formatted": "00:05.77"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0035",
+      "track_id": 25,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 3.466,
+        "formatted": "00:03.47"
+      },
+      "end_timestamp": {
+        "seconds": 5.783,
+        "formatted": "00:05.78"
+      },
+      "duration_seconds": 2.316,
+      "confidence": 0.641,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0036",
+      "track_id": 25,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 5.783,
+        "formatted": "00:05.78"
+      },
+      "confidence": 0.641,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0037",
+      "track_id": 71,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 6.083,
+        "formatted": "00:06.08"
+      },
+      "confidence": 0.389,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0038",
+      "track_id": 56,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 5.649,
+        "formatted": "00:05.65"
+      },
+      "end_timestamp": {
+        "seconds": 5.966,
+        "formatted": "00:05.97"
+      },
+      "duration_seconds": 0.317,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0039",
+      "track_id": 56,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 5.966,
+        "formatted": "00:05.97"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0040",
+      "track_id": 76,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 6.299,
+        "formatted": "00:06.30"
+      },
+      "confidence": 0.675,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0041",
+      "track_id": 77,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 6.349,
+        "formatted": "00:06.35"
+      },
+      "confidence": 0.84,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0042",
+      "track_id": 82,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 6.516,
+        "formatted": "00:06.52"
+      },
+      "confidence": 0.397,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0043",
+      "track_id": 76,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 6.299,
+        "formatted": "00:06.30"
+      },
+      "end_timestamp": {
+        "seconds": 6.332,
+        "formatted": "00:06.33"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.676,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0044",
+      "track_id": 76,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 6.332,
+        "formatted": "00:06.33"
+      },
+      "confidence": 0.676,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0045",
+      "track_id": 71,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 6.083,
+        "formatted": "00:06.08"
+      },
+      "end_timestamp": {
+        "seconds": 6.366,
+        "formatted": "00:06.37"
+      },
+      "duration_seconds": 0.283,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0046",
+      "track_id": 71,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 6.366,
+        "formatted": "00:06.37"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0047",
+      "track_id": 82,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 6.516,
+        "formatted": "00:06.52"
+      },
+      "end_timestamp": {
+        "seconds": 6.649,
+        "formatted": "00:06.65"
+      },
+      "duration_seconds": 0.133,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0048",
+      "track_id": 82,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 6.649,
+        "formatted": "00:06.65"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0049",
+      "track_id": 88,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 7.066,
+        "formatted": "00:07.07"
+      },
+      "confidence": 0.781,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0050",
+      "track_id": 91,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 7.616,
+        "formatted": "00:07.62"
+      },
+      "confidence": 0.817,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0051",
+      "track_id": 92,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 7.732,
+        "formatted": "00:07.73"
+      },
+      "confidence": 0.341,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0052",
+      "track_id": 99,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 7.949,
+        "formatted": "00:07.95"
+      },
+      "confidence": 0.465,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0053",
+      "track_id": 92,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 7.732,
+        "formatted": "00:07.73"
+      },
+      "end_timestamp": {
+        "seconds": 7.766,
+        "formatted": "00:07.77"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0054",
+      "track_id": 92,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 7.766,
+        "formatted": "00:07.77"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0055",
+      "track_id": 77,
+      "person": "Person 1",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 6.349,
+        "formatted": "00:06.35"
+      },
+      "end_timestamp": {
+        "seconds": 7.816,
+        "formatted": "00:07.82"
+      },
+      "duration_seconds": 1.466,
+      "confidence": 0.781,
+      "description": "Person 1 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0056",
+      "track_id": 77,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 7.816,
+        "formatted": "00:07.82"
+      },
+      "confidence": 0.781,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0057",
+      "track_id": 2,
+      "person": "Person 1",
+      "event": "STAY",
+      "timestamp": {
+        "seconds": 0.0,
+        "formatted": "00:00.00"
+      },
+      "end_timestamp": {
+        "seconds": 7.982,
+        "formatted": "00:07.98"
+      },
+      "duration_seconds": 7.982,
+      "confidence": 0.728,
+      "description": "Person 1 stayed in the scene for 7.98 seconds."
+    },
+    {
+      "event_id": "E0058",
+      "track_id": 2,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 7.982,
+        "formatted": "00:07.98"
+      },
+      "confidence": 0.728,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0059",
+      "track_id": 108,
+      "person": "Person 7",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 8.399,
+        "formatted": "00:08.40"
+      },
+      "confidence": 0.502,
+      "description": "Person 7 entered the video scene."
+    },
+    {
+      "event_id": "E0060",
+      "track_id": 88,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 7.066,
+        "formatted": "00:07.07"
+      },
+      "end_timestamp": {
+        "seconds": 8.149,
+        "formatted": "00:08.15"
+      },
+      "duration_seconds": 1.083,
+      "confidence": 0.708,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0061",
+      "track_id": 88,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 8.149,
+        "formatted": "00:08.15"
+      },
+      "confidence": 0.708,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0062",
+      "track_id": 121,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 8.749,
+        "formatted": "00:08.75"
+      },
+      "confidence": 0.403,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0063",
+      "track_id": 99,
+      "person": "Person 1",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 7.949,
+        "formatted": "00:07.95"
+      },
+      "end_timestamp": {
+        "seconds": 8.665,
+        "formatted": "00:08.67"
+      },
+      "duration_seconds": 0.717,
+      "confidence": 0.586,
+      "description": "Person 1 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0064",
+      "track_id": 99,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 8.665,
+        "formatted": "00:08.67"
+      },
+      "confidence": 0.586,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0065",
+      "track_id": 108,
+      "person": "Person 1",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 8.399,
+        "formatted": "00:08.40"
+      },
+      "end_timestamp": {
+        "seconds": 8.732,
+        "formatted": "00:08.73"
+      },
+      "duration_seconds": 0.333,
+      "confidence": 0.498,
+      "description": "Person 1 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0066",
+      "track_id": 108,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 8.732,
+        "formatted": "00:08.73"
+      },
+      "confidence": 0.498,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0067",
+      "track_id": 128,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 9.015,
+        "formatted": "00:09.02"
+      },
+      "confidence": 0.789,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0068",
+      "track_id": 121,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 8.749,
+        "formatted": "00:08.75"
+      },
+      "end_timestamp": {
+        "seconds": 8.815,
+        "formatted": "00:08.82"
+      },
+      "duration_seconds": 0.067,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0069",
+      "track_id": 121,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 8.815,
+        "formatted": "00:08.82"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0070",
+      "track_id": 132,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 9.082,
+        "formatted": "00:09.08"
+      },
+      "confidence": 0.658,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0071",
+      "track_id": 91,
+      "person": "Person 7",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 7.616,
+        "formatted": "00:07.62"
+      },
+      "end_timestamp": {
+        "seconds": 8.832,
+        "formatted": "00:08.83"
+      },
+      "duration_seconds": 1.217,
+      "confidence": 0.425,
+      "description": "Person 7 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0072",
+      "track_id": 91,
+      "person": "Person 7",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 8.832,
+        "formatted": "00:08.83"
+      },
+      "confidence": 0.425,
+      "description": "Person 7 left the scene."
+    },
+    {
+      "event_id": "E0073",
+      "track_id": 128,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 9.015,
+        "formatted": "00:09.02"
+      },
+      "end_timestamp": {
+        "seconds": 9.082,
+        "formatted": "00:09.08"
+      },
+      "duration_seconds": 0.067,
+      "confidence": 0.773,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0074",
+      "track_id": 128,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 9.082,
+        "formatted": "00:09.08"
+      },
+      "confidence": 0.773,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0075",
+      "track_id": 138,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 9.399,
+        "formatted": "00:09.40"
+      },
+      "confidence": 0.802,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0076",
+      "track_id": 139,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 9.649,
+        "formatted": "00:09.65"
+      },
+      "confidence": 0.779,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0077",
+      "track_id": 138,
+      "person": "Person 6",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 9.399,
+        "formatted": "00:09.40"
+      },
+      "end_timestamp": {
+        "seconds": 9.582,
+        "formatted": "00:09.58"
+      },
+      "duration_seconds": 0.183,
+      "confidence": 0.574,
+      "description": "Person 6 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0078",
+      "track_id": 138,
+      "person": "Person 6",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 9.582,
+        "formatted": "00:09.58"
+      },
+      "confidence": 0.574,
+      "description": "Person 6 left the scene."
+    },
+    {
+      "event_id": "E0079",
+      "track_id": 139,
+      "person": "Person 5",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 9.649,
+        "formatted": "00:09.65"
+      },
+      "end_timestamp": {
+        "seconds": 9.765,
+        "formatted": "00:09.77"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.529,
+      "description": "Person 5 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0080",
+      "track_id": 139,
+      "person": "Person 5",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 9.765,
+        "formatted": "00:09.77"
+      },
+      "confidence": 0.529,
+      "description": "Person 5 left the scene."
+    },
+    {
+      "event_id": "E0081",
+      "track_id": 132,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 9.082,
+        "formatted": "00:09.08"
+      },
+      "end_timestamp": {
+        "seconds": 9.815,
+        "formatted": "00:09.82"
+      },
+      "duration_seconds": 0.733,
+      "confidence": 0.554,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0082",
+      "track_id": 132,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 9.815,
+        "formatted": "00:09.82"
+      },
+      "confidence": 0.554,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0083",
+      "track_id": 57,
+      "person": "Person 5",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 5.733,
+        "formatted": "00:05.73"
+      },
+      "end_timestamp": {
+        "seconds": 10.065,
+        "formatted": "00:10.07"
+      },
+      "duration_seconds": 4.333,
+      "confidence": 0.798,
+      "description": "Person 5 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0084",
+      "track_id": 57,
+      "person": "Person 5",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 10.065,
+        "formatted": "00:10.07"
+      },
+      "confidence": 0.798,
+      "description": "Person 5 left the scene."
+    },
+    {
+      "event_id": "E0085",
+      "track_id": 147,
+      "person": "Person 6",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 12.032,
+        "formatted": "00:12.03"
+      },
+      "confidence": 0.899,
+      "description": "Person 6 entered the video scene."
+    },
+    {
+      "event_id": "E0086",
+      "track_id": 150,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 12.532,
+        "formatted": "00:12.53"
+      },
+      "confidence": 0.732,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0087",
+      "track_id": 153,
+      "person": "Person 6",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 12.582,
+        "formatted": "00:12.58"
+      },
+      "confidence": 0.715,
+      "description": "Person 6 entered the video scene."
+    },
+    {
+      "event_id": "E0088",
+      "track_id": 155,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 12.682,
+        "formatted": "00:12.68"
+      },
+      "confidence": 0.611,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0089",
+      "track_id": 162,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 12.832,
+        "formatted": "00:12.83"
+      },
+      "confidence": 0.368,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0090",
+      "track_id": 150,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 12.532,
+        "formatted": "00:12.53"
+      },
+      "end_timestamp": {
+        "seconds": 12.582,
+        "formatted": "00:12.58"
+      },
+      "duration_seconds": 0.05,
+      "confidence": 0.779,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0091",
+      "track_id": 150,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 12.582,
+        "formatted": "00:12.58"
+      },
+      "confidence": 0.779,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0092",
+      "track_id": 153,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 12.582,
+        "formatted": "00:12.58"
+      },
+      "end_timestamp": {
+        "seconds": 12.748,
+        "formatted": "00:12.75"
+      },
+      "duration_seconds": 0.167,
+      "confidence": 0.816,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0093",
+      "track_id": 153,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 12.748,
+        "formatted": "00:12.75"
+      },
+      "confidence": 0.816,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0094",
+      "track_id": 171,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.182,
+        "formatted": "00:13.18"
+      },
+      "confidence": 0.839,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0095",
+      "track_id": 182,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.332,
+        "formatted": "00:13.33"
+      },
+      "confidence": 0.448,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0096",
+      "track_id": 183,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.332,
+        "formatted": "00:13.33"
+      },
+      "confidence": 0.43,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0097",
+      "track_id": 184,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.382,
+        "formatted": "00:13.38"
+      },
+      "confidence": 0.862,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0098",
+      "track_id": 197,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.615,
+        "formatted": "00:13.61"
+      },
+      "confidence": 0.486,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0099",
+      "track_id": 204,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.665,
+        "formatted": "00:13.66"
+      },
+      "confidence": 0.467,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0100",
+      "track_id": 205,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.681,
+        "formatted": "00:13.68"
+      },
+      "confidence": 0.423,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0101",
+      "track_id": 182,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.332,
+        "formatted": "00:13.33"
+      },
+      "end_timestamp": {
+        "seconds": 13.448,
+        "formatted": "00:13.45"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0102",
+      "track_id": 182,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.448,
+        "formatted": "00:13.45"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0103",
+      "track_id": 183,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.332,
+        "formatted": "00:13.33"
+      },
+      "end_timestamp": {
+        "seconds": 13.448,
+        "formatted": "00:13.45"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0104",
+      "track_id": 183,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.448,
+        "formatted": "00:13.45"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0105",
+      "track_id": 209,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 13.731,
+        "formatted": "00:13.73"
+      },
+      "confidence": 0.377,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0106",
+      "track_id": 171,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.182,
+        "formatted": "00:13.18"
+      },
+      "end_timestamp": {
+        "seconds": 13.481,
+        "formatted": "00:13.48"
+      },
+      "duration_seconds": 0.3,
+      "confidence": 0.862,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0107",
+      "track_id": 171,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.481,
+        "formatted": "00:13.48"
+      },
+      "confidence": 0.862,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0108",
+      "track_id": 205,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.681,
+        "formatted": "00:13.68"
+      },
+      "end_timestamp": {
+        "seconds": 13.731,
+        "formatted": "00:13.73"
+      },
+      "duration_seconds": 0.05,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0109",
+      "track_id": 205,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.731,
+        "formatted": "00:13.73"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0110",
+      "track_id": 220,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 14.081,
+        "formatted": "00:14.08"
+      },
+      "confidence": 0.372,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0111",
+      "track_id": 209,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.731,
+        "formatted": "00:13.73"
+      },
+      "end_timestamp": {
+        "seconds": 13.831,
+        "formatted": "00:13.83"
+      },
+      "duration_seconds": 0.1,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0112",
+      "track_id": 209,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.831,
+        "formatted": "00:13.83"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0113",
+      "track_id": 204,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.665,
+        "formatted": "00:13.66"
+      },
+      "end_timestamp": {
+        "seconds": 13.965,
+        "formatted": "00:13.96"
+      },
+      "duration_seconds": 0.3,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0114",
+      "track_id": 204,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 13.965,
+        "formatted": "00:13.96"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0115",
+      "track_id": 229,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 14.365,
+        "formatted": "00:14.36"
+      },
+      "confidence": 0.64,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0116",
+      "track_id": 184,
+      "person": "Person 7",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.382,
+        "formatted": "00:13.38"
+      },
+      "end_timestamp": {
+        "seconds": 14.181,
+        "formatted": "00:14.18"
+      },
+      "duration_seconds": 0.8,
+      "confidence": 0.868,
+      "description": "Person 7 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0117",
+      "track_id": 184,
+      "person": "Person 7",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 14.181,
+        "formatted": "00:14.18"
+      },
+      "confidence": 0.868,
+      "description": "Person 7 left the scene."
+    },
+    {
+      "event_id": "E0118",
+      "track_id": 220,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 14.081,
+        "formatted": "00:14.08"
+      },
+      "end_timestamp": {
+        "seconds": 14.215,
+        "formatted": "00:14.21"
+      },
+      "duration_seconds": 0.133,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0119",
+      "track_id": 220,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 14.215,
+        "formatted": "00:14.21"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0120",
+      "track_id": 197,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 13.615,
+        "formatted": "00:13.61"
+      },
+      "end_timestamp": {
+        "seconds": 14.381,
+        "formatted": "00:14.38"
+      },
+      "duration_seconds": 0.767,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0121",
+      "track_id": 197,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 14.381,
+        "formatted": "00:14.38"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0122",
+      "track_id": 155,
+      "person": "Person 7",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 12.682,
+        "formatted": "00:12.68"
+      },
+      "end_timestamp": {
+        "seconds": 14.581,
+        "formatted": "00:14.58"
+      },
+      "duration_seconds": 1.9,
+      "confidence": 0.473,
+      "description": "Person 7 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0123",
+      "track_id": 155,
+      "person": "Person 7",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 14.581,
+        "formatted": "00:14.58"
+      },
+      "confidence": 0.473,
+      "description": "Person 7 left the scene."
+    },
+    {
+      "event_id": "E0124",
+      "track_id": 229,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 14.365,
+        "formatted": "00:14.36"
+      },
+      "end_timestamp": {
+        "seconds": 14.598,
+        "formatted": "00:14.60"
+      },
+      "duration_seconds": 0.233,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0125",
+      "track_id": 229,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 14.598,
+        "formatted": "00:14.60"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0126",
+      "track_id": 238,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 15.465,
+        "formatted": "00:15.46"
+      },
+      "confidence": 0.356,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0127",
+      "track_id": 246,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 15.581,
+        "formatted": "00:15.58"
+      },
+      "confidence": 0.386,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0128",
+      "track_id": 250,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 15.631,
+        "formatted": "00:15.63"
+      },
+      "confidence": 0.341,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0129",
+      "track_id": 147,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 12.032,
+        "formatted": "00:12.03"
+      },
+      "end_timestamp": {
+        "seconds": 15.431,
+        "formatted": "00:15.43"
+      },
+      "duration_seconds": 3.4,
+      "confidence": 0.648,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0130",
+      "track_id": 147,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 15.431,
+        "formatted": "00:15.43"
+      },
+      "confidence": 0.648,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0131",
+      "track_id": 238,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 15.465,
+        "formatted": "00:15.46"
+      },
+      "end_timestamp": {
+        "seconds": 15.465,
+        "formatted": "00:15.46"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0132",
+      "track_id": 238,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 15.465,
+        "formatted": "00:15.46"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0133",
+      "track_id": 252,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 15.815,
+        "formatted": "00:15.81"
+      },
+      "confidence": 0.432,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0134",
+      "track_id": 246,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 15.581,
+        "formatted": "00:15.58"
+      },
+      "end_timestamp": {
+        "seconds": 15.748,
+        "formatted": "00:15.75"
+      },
+      "duration_seconds": 0.167,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0135",
+      "track_id": 246,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 15.748,
+        "formatted": "00:15.75"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0136",
+      "track_id": 250,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 15.631,
+        "formatted": "00:15.63"
+      },
+      "end_timestamp": {
+        "seconds": 15.831,
+        "formatted": "00:15.83"
+      },
+      "duration_seconds": 0.2,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0137",
+      "track_id": 250,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 15.831,
+        "formatted": "00:15.83"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0138",
+      "track_id": 256,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 16.298,
+        "formatted": "00:16.30"
+      },
+      "confidence": 0.629,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0139",
+      "track_id": 257,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "confidence": 0.402,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0140",
+      "track_id": 258,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "confidence": 0.436,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0141",
+      "track_id": 259,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "confidence": 0.4,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0142",
+      "track_id": 256,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 16.298,
+        "formatted": "00:16.30"
+      },
+      "end_timestamp": {
+        "seconds": 16.314,
+        "formatted": "00:16.31"
+      },
+      "duration_seconds": 0.017,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0143",
+      "track_id": 256,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 16.314,
+        "formatted": "00:16.31"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0144",
+      "track_id": 265,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 16.614,
+        "formatted": "00:16.61"
+      },
+      "confidence": 0.427,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0145",
+      "track_id": 259,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "end_timestamp": {
+        "seconds": 16.698,
+        "formatted": "00:16.70"
+      },
+      "duration_seconds": 0.283,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0146",
+      "track_id": 259,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 16.698,
+        "formatted": "00:16.70"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0147",
+      "track_id": 281,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 17.331,
+        "formatted": "00:17.33"
+      },
+      "confidence": 0.371,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0148",
+      "track_id": 282,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 17.348,
+        "formatted": "00:17.35"
+      },
+      "confidence": 0.444,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0149",
+      "track_id": 257,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "end_timestamp": {
+        "seconds": 17.181,
+        "formatted": "00:17.18"
+      },
+      "duration_seconds": 0.767,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0150",
+      "track_id": 257,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.181,
+        "formatted": "00:17.18"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0151",
+      "track_id": 281,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 17.331,
+        "formatted": "00:17.33"
+      },
+      "end_timestamp": {
+        "seconds": 17.331,
+        "formatted": "00:17.33"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0152",
+      "track_id": 281,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.331,
+        "formatted": "00:17.33"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0153",
+      "track_id": 288,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 17.731,
+        "formatted": "00:17.73"
+      },
+      "confidence": 0.445,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0154",
+      "track_id": 291,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 17.814,
+        "formatted": "00:17.81"
+      },
+      "confidence": 0.472,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0155",
+      "track_id": 265,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 16.614,
+        "formatted": "00:16.61"
+      },
+      "end_timestamp": {
+        "seconds": 17.664,
+        "formatted": "00:17.66"
+      },
+      "duration_seconds": 1.05,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0156",
+      "track_id": 265,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.664,
+        "formatted": "00:17.66"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0157",
+      "track_id": 282,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 17.348,
+        "formatted": "00:17.35"
+      },
+      "end_timestamp": {
+        "seconds": 17.698,
+        "formatted": "00:17.70"
+      },
+      "duration_seconds": 0.35,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0158",
+      "track_id": 282,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.698,
+        "formatted": "00:17.70"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0159",
+      "track_id": 288,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 17.731,
+        "formatted": "00:17.73"
+      },
+      "end_timestamp": {
+        "seconds": 17.781,
+        "formatted": "00:17.78"
+      },
+      "duration_seconds": 0.05,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0160",
+      "track_id": 288,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.781,
+        "formatted": "00:17.78"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0161",
+      "track_id": 306,
+      "person": "Person 9",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 18.131,
+        "formatted": "00:18.13"
+      },
+      "confidence": 0.464,
+      "description": "Person 9 entered the video scene."
+    },
+    {
+      "event_id": "E0162",
+      "track_id": 311,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 18.164,
+        "formatted": "00:18.16"
+      },
+      "confidence": 0.353,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0163",
+      "track_id": 291,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 17.814,
+        "formatted": "00:17.81"
+      },
+      "end_timestamp": {
+        "seconds": 17.998,
+        "formatted": "00:18.00"
+      },
+      "duration_seconds": 0.183,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0164",
+      "track_id": 291,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 17.998,
+        "formatted": "00:18.00"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0165",
+      "track_id": 258,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 16.414,
+        "formatted": "00:16.41"
+      },
+      "end_timestamp": {
+        "seconds": 18.048,
+        "formatted": "00:18.05"
+      },
+      "duration_seconds": 1.633,
+      "confidence": 0.474,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0166",
+      "track_id": 258,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 18.048,
+        "formatted": "00:18.05"
+      },
+      "confidence": 0.474,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0167",
+      "track_id": 341,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 18.947,
+        "formatted": "00:18.95"
+      },
+      "confidence": 0.402,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0168",
+      "track_id": 343,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 18.964,
+        "formatted": "00:18.96"
+      },
+      "confidence": 0.539,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0169",
+      "track_id": 347,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.014,
+        "formatted": "00:19.01"
+      },
+      "confidence": 0.378,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0170",
+      "track_id": 355,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.097,
+        "formatted": "00:19.10"
+      },
+      "confidence": 0.353,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0171",
+      "track_id": 358,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.131,
+        "formatted": "00:19.13"
+      },
+      "confidence": 0.517,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0172",
+      "track_id": 311,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 18.164,
+        "formatted": "00:18.16"
+      },
+      "end_timestamp": {
+        "seconds": 18.881,
+        "formatted": "00:18.88"
+      },
+      "duration_seconds": 0.717,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0173",
+      "track_id": 311,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 18.881,
+        "formatted": "00:18.88"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0174",
+      "track_id": 360,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.147,
+        "formatted": "00:19.15"
+      },
+      "confidence": 0.352,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0175",
+      "track_id": 363,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.164,
+        "formatted": "00:19.16"
+      },
+      "confidence": 0.561,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0176",
+      "track_id": 365,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "confidence": 0.399,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0177",
+      "track_id": 369,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.197,
+        "formatted": "00:19.20"
+      },
+      "confidence": 0.359,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0178",
+      "track_id": 306,
+      "person": "Person 9",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 18.131,
+        "formatted": "00:18.13"
+      },
+      "end_timestamp": {
+        "seconds": 18.964,
+        "formatted": "00:18.96"
+      },
+      "duration_seconds": 0.833,
+      "confidence": 0.479,
+      "description": "Person 9 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0179",
+      "track_id": 306,
+      "person": "Person 9",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 18.964,
+        "formatted": "00:18.96"
+      },
+      "confidence": 0.479,
+      "description": "Person 9 left the scene."
+    },
+    {
+      "event_id": "E0180",
+      "track_id": 372,
+      "person": "Person 10",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.247,
+        "formatted": "00:19.25"
+      },
+      "confidence": 0.415,
+      "description": "Person 10 entered the video scene."
+    },
+    {
+      "event_id": "E0181",
+      "track_id": 347,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.014,
+        "formatted": "00:19.01"
+      },
+      "end_timestamp": {
+        "seconds": 19.014,
+        "formatted": "00:19.01"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0182",
+      "track_id": 347,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.014,
+        "formatted": "00:19.01"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0183",
+      "track_id": 378,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.281,
+        "formatted": "00:19.28"
+      },
+      "confidence": 0.531,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0184",
+      "track_id": 379,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.297,
+        "formatted": "00:19.30"
+      },
+      "confidence": 0.433,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0185",
+      "track_id": 343,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 18.964,
+        "formatted": "00:18.96"
+      },
+      "end_timestamp": {
+        "seconds": 19.147,
+        "formatted": "00:19.15"
+      },
+      "duration_seconds": 0.183,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0186",
+      "track_id": 343,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.147,
+        "formatted": "00:19.15"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0187",
+      "track_id": 355,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.097,
+        "formatted": "00:19.10"
+      },
+      "end_timestamp": {
+        "seconds": 19.164,
+        "formatted": "00:19.16"
+      },
+      "duration_seconds": 0.067,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0188",
+      "track_id": 355,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.164,
+        "formatted": "00:19.16"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0189",
+      "track_id": 360,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.147,
+        "formatted": "00:19.15"
+      },
+      "end_timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.547,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0190",
+      "track_id": 360,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "confidence": 0.547,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0191",
+      "track_id": 365,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "end_timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0192",
+      "track_id": 365,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.181,
+        "formatted": "00:19.18"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0193",
+      "track_id": 363,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.164,
+        "formatted": "00:19.16"
+      },
+      "end_timestamp": {
+        "seconds": 19.214,
+        "formatted": "00:19.21"
+      },
+      "duration_seconds": 0.05,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0194",
+      "track_id": 363,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.214,
+        "formatted": "00:19.21"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0195",
+      "track_id": 369,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.197,
+        "formatted": "00:19.20"
+      },
+      "end_timestamp": {
+        "seconds": 19.231,
+        "formatted": "00:19.23"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0196",
+      "track_id": 369,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.231,
+        "formatted": "00:19.23"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0197",
+      "track_id": 358,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.131,
+        "formatted": "00:19.13"
+      },
+      "end_timestamp": {
+        "seconds": 19.247,
+        "formatted": "00:19.25"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.506,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0198",
+      "track_id": 358,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.247,
+        "formatted": "00:19.25"
+      },
+      "confidence": 0.506,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0199",
+      "track_id": 400,
+      "person": "Person 10",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.514,
+        "formatted": "00:19.51"
+      },
+      "confidence": 0.656,
+      "description": "Person 10 entered the video scene."
+    },
+    {
+      "event_id": "E0200",
+      "track_id": 404,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.597,
+        "formatted": "00:19.60"
+      },
+      "confidence": 0.324,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0201",
+      "track_id": 406,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.647,
+        "formatted": "00:19.65"
+      },
+      "confidence": 0.312,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0202",
+      "track_id": 341,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 18.947,
+        "formatted": "00:18.95"
+      },
+      "end_timestamp": {
+        "seconds": 19.431,
+        "formatted": "00:19.43"
+      },
+      "duration_seconds": 0.483,
+      "confidence": 0.548,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0203",
+      "track_id": 341,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.431,
+        "formatted": "00:19.43"
+      },
+      "confidence": 0.548,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0204",
+      "track_id": 407,
+      "person": "Person 10",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.697,
+        "formatted": "00:19.70"
+      },
+      "confidence": 0.565,
+      "description": "Person 10 entered the video scene."
+    },
+    {
+      "event_id": "E0205",
+      "track_id": 378,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.281,
+        "formatted": "00:19.28"
+      },
+      "end_timestamp": {
+        "seconds": 19.597,
+        "formatted": "00:19.60"
+      },
+      "duration_seconds": 0.317,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0206",
+      "track_id": 378,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.597,
+        "formatted": "00:19.60"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0207",
+      "track_id": 404,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.597,
+        "formatted": "00:19.60"
+      },
+      "end_timestamp": {
+        "seconds": 19.614,
+        "formatted": "00:19.61"
+      },
+      "duration_seconds": 0.017,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0208",
+      "track_id": 404,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.614,
+        "formatted": "00:19.61"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0209",
+      "track_id": 372,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.247,
+        "formatted": "00:19.25"
+      },
+      "end_timestamp": {
+        "seconds": 19.647,
+        "formatted": "00:19.65"
+      },
+      "duration_seconds": 0.4,
+      "confidence": 0.422,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0210",
+      "track_id": 372,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.647,
+        "formatted": "00:19.65"
+      },
+      "confidence": 0.422,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0211",
+      "track_id": 415,
+      "person": "Person 2",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.914,
+        "formatted": "00:19.91"
+      },
+      "confidence": 0.589,
+      "description": "Person 2 entered the video scene."
+    },
+    {
+      "event_id": "E0212",
+      "track_id": 406,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.647,
+        "formatted": "00:19.65"
+      },
+      "end_timestamp": {
+        "seconds": 19.664,
+        "formatted": "00:19.66"
+      },
+      "duration_seconds": 0.017,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0213",
+      "track_id": 406,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.664,
+        "formatted": "00:19.66"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0214",
+      "track_id": 379,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.297,
+        "formatted": "00:19.30"
+      },
+      "end_timestamp": {
+        "seconds": 19.697,
+        "formatted": "00:19.70"
+      },
+      "duration_seconds": 0.4,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0215",
+      "track_id": 379,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.697,
+        "formatted": "00:19.70"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0216",
+      "track_id": 400,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.514,
+        "formatted": "00:19.51"
+      },
+      "end_timestamp": {
+        "seconds": 19.731,
+        "formatted": "00:19.73"
+      },
+      "duration_seconds": 0.217,
+      "confidence": 0.565,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0217",
+      "track_id": 400,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.731,
+        "formatted": "00:19.73"
+      },
+      "confidence": 0.565,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0218",
+      "track_id": 416,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 19.997,
+        "formatted": "00:20.00"
+      },
+      "confidence": 0.599,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0219",
+      "track_id": 407,
+      "person": "Person 10",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.697,
+        "formatted": "00:19.70"
+      },
+      "end_timestamp": {
+        "seconds": 19.747,
+        "formatted": "00:19.75"
+      },
+      "duration_seconds": 0.05,
+      "confidence": 0.429,
+      "description": "Person 10 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0220",
+      "track_id": 407,
+      "person": "Person 10",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.747,
+        "formatted": "00:19.75"
+      },
+      "confidence": 0.429,
+      "description": "Person 10 left the scene."
+    },
+    {
+      "event_id": "E0221",
+      "track_id": 252,
+      "person": "Person 2",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 15.815,
+        "formatted": "00:15.81"
+      },
+      "end_timestamp": {
+        "seconds": 19.914,
+        "formatted": "00:19.91"
+      },
+      "duration_seconds": 4.099,
+      "confidence": 0.589,
+      "description": "Person 2 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0222",
+      "track_id": 252,
+      "person": "Person 2",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 19.914,
+        "formatted": "00:19.91"
+      },
+      "confidence": 0.589,
+      "description": "Person 2 left the scene."
+    },
+    {
+      "event_id": "E0223",
+      "track_id": 415,
+      "person": "Person 2",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.914,
+        "formatted": "00:19.91"
+      },
+      "end_timestamp": {
+        "seconds": 20.281,
+        "formatted": "00:20.28"
+      },
+      "duration_seconds": 0.367,
+      "confidence": 0.512,
+      "description": "Person 2 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0224",
+      "track_id": 415,
+      "person": "Person 2",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 20.281,
+        "formatted": "00:20.28"
+      },
+      "confidence": 0.512,
+      "description": "Person 2 left the scene."
+    },
+    {
+      "event_id": "E0225",
+      "track_id": 429,
+      "person": "Person 11",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 20.581,
+        "formatted": "00:20.58"
+      },
+      "confidence": 0.71,
+      "description": "Person 11 entered the video scene."
+    },
+    {
+      "event_id": "E0226",
+      "track_id": 416,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 19.997,
+        "formatted": "00:20.00"
+      },
+      "end_timestamp": {
+        "seconds": 20.331,
+        "formatted": "00:20.33"
+      },
+      "duration_seconds": 0.333,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0227",
+      "track_id": 416,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 20.331,
+        "formatted": "00:20.33"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0228",
+      "track_id": 435,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 20.797,
+        "formatted": "00:20.80"
+      },
+      "confidence": 0.359,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0229",
+      "track_id": 435,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 20.797,
+        "formatted": "00:20.80"
+      },
+      "end_timestamp": {
+        "seconds": 20.797,
+        "formatted": "00:20.80"
+      },
+      "duration_seconds": 0.0,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0230",
+      "track_id": 435,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 20.797,
+        "formatted": "00:20.80"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0231",
+      "track_id": 441,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 21.097,
+        "formatted": "00:21.10"
+      },
+      "confidence": 0.79,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0232",
+      "track_id": 444,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 21.214,
+        "formatted": "00:21.21"
+      },
+      "confidence": 0.523,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0233",
+      "track_id": 448,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 21.314,
+        "formatted": "00:21.31"
+      },
+      "confidence": 0.328,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0234",
+      "track_id": 162,
+      "person": "Person 1",
+      "event": "STAY",
+      "timestamp": {
+        "seconds": 12.832,
+        "formatted": "00:12.83"
+      },
+      "end_timestamp": {
+        "seconds": 21.097,
+        "formatted": "00:21.10"
+      },
+      "duration_seconds": 8.266,
+      "confidence": 0.79,
+      "description": "Person 1 stayed in the scene for 8.27 seconds."
+    },
+    {
+      "event_id": "E0235",
+      "track_id": 162,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 21.097,
+        "formatted": "00:21.10"
+      },
+      "confidence": 0.79,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0236",
+      "track_id": 429,
+      "person": "Person 1",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 20.581,
+        "formatted": "00:20.58"
+      },
+      "end_timestamp": {
+        "seconds": 21.264,
+        "formatted": "00:21.26"
+      },
+      "duration_seconds": 0.683,
+      "confidence": 0.793,
+      "description": "Person 1 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0237",
+      "track_id": 429,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 21.264,
+        "formatted": "00:21.26"
+      },
+      "confidence": 0.793,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0238",
+      "track_id": 448,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 21.314,
+        "formatted": "00:21.31"
+      },
+      "end_timestamp": {
+        "seconds": 21.547,
+        "formatted": "00:21.55"
+      },
+      "duration_seconds": 0.233,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0239",
+      "track_id": 448,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 21.547,
+        "formatted": "00:21.55"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0240",
+      "track_id": 444,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 21.214,
+        "formatted": "00:21.21"
+      },
+      "end_timestamp": {
+        "seconds": 21.58,
+        "formatted": "00:21.58"
+      },
+      "duration_seconds": 0.367,
+      "confidence": 0.404,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0241",
+      "track_id": 444,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 21.58,
+        "formatted": "00:21.58"
+      },
+      "confidence": 0.404,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0242",
+      "track_id": 465,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 21.98,
+        "formatted": "00:21.98"
+      },
+      "confidence": 0.379,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0243",
+      "track_id": 472,
+      "person": "Person 1",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.13,
+        "formatted": "00:22.13"
+      },
+      "confidence": 0.734,
+      "description": "Person 1 entered the video scene."
+    },
+    {
+      "event_id": "E0244",
+      "track_id": 477,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.197,
+        "formatted": "00:22.20"
+      },
+      "confidence": 0.451,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0245",
+      "track_id": 479,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.23,
+        "formatted": "00:22.23"
+      },
+      "confidence": 0.397,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0246",
+      "track_id": 465,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 21.98,
+        "formatted": "00:21.98"
+      },
+      "end_timestamp": {
+        "seconds": 22.097,
+        "formatted": "00:22.10"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0247",
+      "track_id": 465,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.097,
+        "formatted": "00:22.10"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0248",
+      "track_id": 487,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.414,
+        "formatted": "00:22.41"
+      },
+      "confidence": 0.4,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0249",
+      "track_id": 479,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.23,
+        "formatted": "00:22.23"
+      },
+      "end_timestamp": {
+        "seconds": 22.264,
+        "formatted": "00:22.26"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0250",
+      "track_id": 479,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.264,
+        "formatted": "00:22.26"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0251",
+      "track_id": 493,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.547,
+        "formatted": "00:22.55"
+      },
+      "confidence": 0.535,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0252",
+      "track_id": 502,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.63,
+        "formatted": "00:22.63"
+      },
+      "confidence": 0.403,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0253",
+      "track_id": 477,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.197,
+        "formatted": "00:22.20"
+      },
+      "end_timestamp": {
+        "seconds": 22.38,
+        "formatted": "00:22.38"
+      },
+      "duration_seconds": 0.183,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0254",
+      "track_id": 477,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.38,
+        "formatted": "00:22.38"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0255",
+      "track_id": 504,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 22.647,
+        "formatted": "00:22.65"
+      },
+      "confidence": 0.383,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0256",
+      "track_id": 472,
+      "person": "Person 1",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.13,
+        "formatted": "00:22.13"
+      },
+      "end_timestamp": {
+        "seconds": 22.547,
+        "formatted": "00:22.55"
+      },
+      "duration_seconds": 0.417,
+      "confidence": 0.436,
+      "description": "Person 1 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0257",
+      "track_id": 472,
+      "person": "Person 1",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.547,
+        "formatted": "00:22.55"
+      },
+      "confidence": 0.436,
+      "description": "Person 1 left the scene."
+    },
+    {
+      "event_id": "E0258",
+      "track_id": 487,
+      "person": "Person 13",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.414,
+        "formatted": "00:22.41"
+      },
+      "end_timestamp": {
+        "seconds": 22.614,
+        "formatted": "00:22.61"
+      },
+      "duration_seconds": 0.2,
+      "confidence": 0.755,
+      "description": "Person 13 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0259",
+      "track_id": 487,
+      "person": "Person 13",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.614,
+        "formatted": "00:22.61"
+      },
+      "confidence": 0.755,
+      "description": "Person 13 left the scene."
+    },
+    {
+      "event_id": "E0260",
+      "track_id": 502,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.63,
+        "formatted": "00:22.63"
+      },
+      "end_timestamp": {
+        "seconds": 22.647,
+        "formatted": "00:22.65"
+      },
+      "duration_seconds": 0.017,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0261",
+      "track_id": 502,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.647,
+        "formatted": "00:22.65"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0262",
+      "track_id": 518,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 23.08,
+        "formatted": "00:23.08"
+      },
+      "confidence": 0.356,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0263",
+      "track_id": 493,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.547,
+        "formatted": "00:22.55"
+      },
+      "end_timestamp": {
+        "seconds": 22.83,
+        "formatted": "00:22.83"
+      },
+      "duration_seconds": 0.283,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0264",
+      "track_id": 493,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 22.83,
+        "formatted": "00:22.83"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0265",
+      "track_id": 520,
+      "person": "Person 13",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 23.114,
+        "formatted": "00:23.11"
+      },
+      "confidence": 0.836,
+      "description": "Person 13 entered the video scene."
+    },
+    {
+      "event_id": "E0266",
+      "track_id": 518,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 23.08,
+        "formatted": "00:23.08"
+      },
+      "end_timestamp": {
+        "seconds": 23.197,
+        "formatted": "00:23.20"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0267",
+      "track_id": 518,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 23.197,
+        "formatted": "00:23.20"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0268",
+      "track_id": 544,
+      "person": "Unknown",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 23.963,
+        "formatted": "00:23.96"
+      },
+      "confidence": 0.324,
+      "description": "Unknown entered the video scene."
+    },
+    {
+      "event_id": "E0269",
+      "track_id": 545,
+      "person": "Person 14",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 24.047,
+        "formatted": "00:24.05"
+      },
+      "confidence": 0.836,
+      "description": "Person 14 entered the video scene."
+    },
+    {
+      "event_id": "E0270",
+      "track_id": 544,
+      "person": "Unknown",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 23.963,
+        "formatted": "00:23.96"
+      },
+      "end_timestamp": {
+        "seconds": 24.08,
+        "formatted": "00:24.08"
+      },
+      "duration_seconds": 0.117,
+      "confidence": 0.0,
+      "description": "Unknown appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0271",
+      "track_id": 544,
+      "person": "Unknown",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 24.08,
+        "formatted": "00:24.08"
+      },
+      "confidence": 0.0,
+      "description": "Unknown left the scene."
+    },
+    {
+      "event_id": "E0272",
+      "track_id": 545,
+      "person": "Person 14",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 24.047,
+        "formatted": "00:24.05"
+      },
+      "end_timestamp": {
+        "seconds": 24.08,
+        "formatted": "00:24.08"
+      },
+      "duration_seconds": 0.033,
+      "confidence": 0.836,
+      "description": "Person 14 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0273",
+      "track_id": 545,
+      "person": "Person 14",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 24.08,
+        "formatted": "00:24.08"
+      },
+      "confidence": 0.836,
+      "description": "Person 14 left the scene."
+    },
+    {
+      "event_id": "E0274",
+      "track_id": 504,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 22.647,
+        "formatted": "00:22.65"
+      },
+      "end_timestamp": {
+        "seconds": 24.297,
+        "formatted": "00:24.30"
+      },
+      "duration_seconds": 1.65,
+      "confidence": 0.761,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0275",
+      "track_id": 504,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 24.297,
+        "formatted": "00:24.30"
+      },
+      "confidence": 0.761,
+      "description": "Person 4 left the scene."
+    },
+    {
+      "event_id": "E0276",
+      "track_id": 549,
+      "person": "Person 4",
+      "event": "ENTER",
+      "timestamp": {
+        "seconds": 24.93,
+        "formatted": "00:24.93"
+      },
+      "confidence": 0.705,
+      "description": "Person 4 entered the video scene."
+    },
+    {
+      "event_id": "E0277",
+      "track_id": 549,
+      "person": "Person 4",
+      "event": "SHORT_STAY",
+      "timestamp": {
+        "seconds": 24.93,
+        "formatted": "00:24.93"
+      },
+      "end_timestamp": {
+        "seconds": 24.947,
+        "formatted": "00:24.95"
+      },
+      "duration_seconds": 0.017,
+      "confidence": 0.712,
+      "description": "Person 4 appeared briefly and did not stay."
+    },
+    {
+      "event_id": "E0278",
+      "track_id": 549,
+      "person": "Person 4",
+      "event": "LEAVE",
+      "timestamp": {
+        "seconds": 24.947,
+        "formatted": "00:24.95"
+      },
+      "confidence": 0.712,
+      "description": "Person 4 left the scene."
+    }
+  ]
+}

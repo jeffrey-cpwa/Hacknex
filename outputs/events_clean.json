@@ -1,0 +1,123 @@
+{
+  "video": {
+    "video_id": "example",
+    "filename": "example.mp4",
+    "duration_seconds": 15.23,
+    "fps": 30.0,
+    "total_frames": 457
+  },
+  "people": [
+    {
+      "person_id": "person_1",
+      "label": "Person 1"
+    },
+    {
+      "person_id": "person_2",
+      "label": "Person 2"
+    },
+    {
+      "person_id": "person_3",
+      "label": "Person 3"
+    }
+  ],
+  "summary": {
+    "total_people": 3,
+    "total_events": 8,
+    "enter_count": 3,
+    "leave_count": 3,
+    "stay_count": 1,
+    "short_stay_count": 1
+  },
+  "event_sequence": [
+    "E0001",
+    "E0002",
+    "E0003",
+    "E0004",
+    "E0005",
+    "E0006",
+    "E0007",
+    "E0008"
+  ],
+  "events": [
+    {
+      "event_id": "E0001",
+      "person_id": "person_1",
+      "person_label": "Person 1",
+      "action": "ENTER",
+      "start_time": 3.42,
+      "end_time": 3.42,
+      "duration": 0.0,
+      "confidence": 0.94
+    },
+    {
+      "event_id": "E0002",
+      "person_id": "person_1",
+      "person_label": "Person 1",
+      "action": "STAY",
+      "start_time": 3.42,
+      "end_time": 10.8,
+      "duration": 7.38,
+      "confidence": 0.96
+    },
+    {
+      "event_id": "E0003",
+      "person_id": "person_2",
+      "person_label": "Person 2",
+      "action": "ENTER",
+      "start_time": 4.17,
+      "end_time": 4.17,
+      "duration": 0.0,
+      "confidence": 0.91
+    },
+    {
+      "event_id": "E0004",
+      "person_id": "person_3",
+      "person_label": "Person 3",
+      "action": "ENTER",
+      "start_time": 5.0,
+      "end_time": 5.0,
+      "duration": 0.0,
+      "confidence": null
+    },
+    {
+      "event_id": "E0005",
+      "person_id": "person_3",
+      "person_label": "Person 3",
+      "action": "SHORT_STAY",
+      "start_time": 5.0,
+      "end_time": 5.5,
+      "duration": 0.5,
+      "confidence": 0.72
+    },
+    {
+      "event_id": "E0006",
+      "person_id": "person_3",
+      "person_label": "Person 3",
+      "action": "LEAVE",
+      "start_time": 5.5,
+      "end_time": 5.5,
+      "duration": 0.0,
+      "confidence": 0.68
+    },
+    {
+      "event_id": "E0007",
+      "person_id": "person_2",
+      "person_label": "Person 2",
+      "action": "LEAVE",
+      "start_time": 7.31,
+      "end_time": 7.31,
+      "duration": 0.0,
+      "confidence": 0.89
+    },
+    {
+      "event_id": "E0008",
+      "person_id": "person_1",
+      "person_label": "Person 1",
+      "action": "LEAVE",
+      "start_time": 10.8,
+      "end_time": 10.8,
+      "duration": 0.0,
+      "confidence": 0.93
+    }
+  ]
+}
