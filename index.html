@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Event Analytics Engine</title>
+  <meta name="description" content="Person-Centric AI Video Event Data Ingestion, Cleaning, Normalization, Track Consolidation, and Temporal Analytics Engine.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <!-- Chart.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="app-layout">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-content">
+        <div class="header-title-group">
+          <div class="system-tag">HNX26PSI02 Analytics Module</div>
+          <h1>Video Event Analytics Engine</h1>
+          <p class="subtitle">Person-Centric Video Event Normalization, Track Consolidation & Temporal Analytics</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 1: DATA INGESTION LAYER -->
+    <section class="panel-section ingestion-section">
+      <div class="panel-header">
+        <h2>1. Data Ingestion Layer</h2>
+        <p class="panel-sub">Upload raw JSON output from computer vision systems or paste raw payload below</p>
+      </div>
+
+      <div class="ingestion-grid">
+        <!-- File Dropzone -->
+        <div class="dropzone" id="file-dropzone">
+          <div class="dropzone-icon">📁</div>
+          <div class="dropzone-text">
+            <strong>Click to upload JSON file</strong> or drag & drop file here
+          </div>
+          <span class="dropzone-hint">Supports .json outputs with people, tracks, objects, detections payload</span>
+          <input type="file" id="file-input" accept=".json,application/json" style="display: none;">
+        </div>
+
+        <!-- Textarea Paste -->
+        <div class="textarea-wrapper">
+          <textarea id="json-input" placeholder="Paste raw JSON array or object payload here..." spellcheck="false"></textarea>
+        </div>
+      </div>
+
+      <!-- Actions Bar -->
+      <div class="actions-bar">
+        <button id="btn-process" class="btn btn-primary">Process JSON Payload</button>
+        <button id="btn-clean-sample" class="btn btn-secondary">Load Clean Person Sample</button>
+        <button id="btn-messy-sample" class="btn btn-secondary">Load Messy Real-World Sample</button>
+        <button id="btn-clear" class="btn btn-ghost">Clear Input</button>
+      </div>
+
+      <div id="json-error-alert" class="alert-box error-alert" style="display: none;"></div>
+    </section>
+
+    <!-- SECTION 2: PERSON-CENTRIC DATA QUALITY SUMMARY DASHBOARD -->
+    <section class="panel-section quality-section">
+      <div class="panel-header">
+        <h2>2. Person-Centric Data Quality Summary</h2>
+        <p class="panel-sub">Real-time statistics derived directly from ingested JSON pipeline</p>
+      </div>
+
+      <div class="metrics-grid">
+        <div class="metric-box">
+          <span class="metric-title">Total Raw Records</span>
+          <span class="metric-number" id="metric-raw-records">0</span>
+          <span class="metric-desc">Complete ingested payload</span>
+        </div>
+
+        <div class="metric-box status-person">
+          <span class="metric-title">Person Records</span>
+          <span class="metric-number" id="metric-person-records">0</span>
+          <span class="metric-desc">Identified human detections</span>
+        </div>
+
+        <div class="metric-box status-object">
+          <span class="metric-title">Ignored Object Records</span>
+          <span class="metric-number" id="metric-ignored-objects">0</span>
+          <span class="metric-desc">Excluded from main graphs</span>
+        </div>
+
+        <div class="metric-box status-valid">
+          <span class="metric-title">Valid Person Events</span>
+          <span class="metric-number" id="metric-valid-person-events">0</span>
+          <span class="metric-desc">Consolidated analytics events</span>
+        </div>
+
+        <div class="metric-box status-warning">
+          <span class="metric-title">Warnings</span>
+          <span class="metric-number" id="metric-warning-records">0</span>
+          <span class="metric-desc">Low conf / duplicate notes</span>
+        </div>
+
+        <div class="metric-box status-invalid">
+          <span class="metric-title">Invalid Person Records</span>
+          <span class="metric-number" id="metric-invalid-records">0</span>
+          <span class="metric-desc">Missing timestamp or label</span>
+        </div>
+
+        <div class="metric-box">
+          <span class="metric-title">Unique Person Event Types</span>
+          <span class="metric-number" id="metric-unique-types">0</span>
+          <span class="metric-desc">Normalized categories</span>
+        </div>
+
+        <div class="metric-box status-suspicious">
+          <span class="metric-title">Suspicious Events</span>
+          <span class="metric-number" id="metric-suspicious-events">0</span>
+          <span class="metric-desc">Attention & anomaly events</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: CLEANED DATA AUDIT TABLE -->
+    <section class="panel-section table-section">
+      <div class="panel-header flex-header">
+        <div>
+          <h2>3. Person Activity Audit</h2>
+          <p class="panel-sub">Normalized person events with evidence links to full raw JSON</p>
+        </div>
+        <span class="record-badge" id="table-record-count">0 records</span>
+      </div>
+
+      <!-- Controls & Filters -->
+      <div class="table-controls">
+        <input type="text" id="table-search" placeholder="Search person events, track ID, raw json..." class="form-input">
+        
+        <select id="filter-view-type" class="form-select">
+          <option value="person" selected>Person Events ▼</option>
+          <option value="suspicious">Suspicious Events</option>
+          <option value="all_raw">All Raw Records</option>
+          <option value="objects">Ignored Objects</option>
+        </select>
+
+        <select id="filter-event-type" class="form-select">
+          <option value="all">All Person Event Types</option>
+        </select>
+      </div>
+
+      <!-- Data Table -->
+      <div class="table-container">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Person / Track ID</th>
+              <th>Activity</th>
+              <th>Event Type</th>
+              <th>Confidence</th>
+              <th>Status</th>
+              <th>Suspicious</th>
+              <th>Evidence</th>
+            </tr>
+          </thead>
+          <tbody id="table-body">
+            <tr>
+              <td colspan="8" class="table-empty">No JSON data loaded. Upload or paste raw JSON above.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- SECTION 4: PERSON ACTIVITY ANALYSIS -->
+    <section class="panel-section analysis-section">
+      <div class="panel-header">
+        <h2>4. Person Activity Analysis</h2>
+        <p class="panel-sub">Filter and inspect what each person did during a specific time range.</p>
+      </div>
+
+      <!-- Controls -->
+      <div class="timeline-controls">
+        <div class="control-group">
+          <label for="person-selector">Person:</label>
+          <select id="person-selector" class="form-select">
+            <option value="all">All Persons ▼</option>
+          </select>
+        </div>
+        <div class="control-group time-range">
+          <label>Start Time (s):</label>
+          <input type="number" id="time-start" class="form-input" min="0" step="1" value="0">
+          <label>End Time (s):</label>
+          <input type="number" id="time-end" class="form-input" min="0" step="1">
+        </div>
+      </div>
+
+      <!-- Activity Details Table (Analysis View) -->
+      <div class="timeline-table-container" style="margin-top: 1rem;">
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Timestamp</th>
+              <th>Person</th>
+              <th>Activity</th>
+              <th>Duration</th>
+              <th>Confidence</th>
+              <th>Track ID</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody id="analysis-table-body">
+            <tr>
+              <td colspan="7" class="table-empty">No events selected</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- RAW RECORD INSPECTION MODAL -->
+  <div id="raw-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modal-index">Source Record</h3>
+        <button id="modal-close" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-meta">
+          <div><strong>Category:</strong> <span id="modal-category" class="status-badge"></span></div>
+          <div><strong>Validation Status:</strong> <span id="modal-status" class="status-badge"></span></div>
+          <div><strong>Suspicious Flag:</strong> <span id="modal-suspicious" class="status-badge"></span></div>
+          <div><strong>Notes:</strong> <span id="modal-reason"></span></div>
+        </div>
+        <div class="raw-code-label">Original Unaltered Source Record (Evidence):</div>
+        <pre><code id="modal-json-code"></code></pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- EVENT DETAIL MODAL -->
+  <div id="event-detail-modal" class="modal-overlay" style="display: none;">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Event Details</h3>
+        <button id="event-detail-close" class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="detail-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+          <div><strong>Event ID:</strong> <span id="ed-eventid"></span></div>
+          <div><strong>Person:</strong> <span id="ed-person"></span></div>
+          <div><strong>Track ID:</strong> <span id="ed-trackid"></span></div>
+          <div><strong>Activity:</strong> <span id="ed-activity"></span></div>
+          <div><strong>Timestamp:</strong> <span id="ed-timestamp"></span></div>
+          <div><strong>End Timestamp:</strong> <span id="ed-endtimestamp"></span></div>
+          <div><strong>Duration:</strong> <span id="ed-duration"></span></div>
+          <div><strong>Confidence:</strong> <span id="ed-confidence"></span></div>
+        </div>
+        <div class="detail-desc">
+          <strong>Description:</strong> <span id="ed-desc"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data and Application Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
